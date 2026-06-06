@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADVantage Review: ACANSA INVESTMENT MANAGEMENT GROUP, LLC</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Custom 5-Year Growth Analytics for ACANSA INVESTMENT MANAGEMENT GROUP, LLC">
+    <meta property="og:url" content="https://advantage.precisiongrowthpartners.io/acansa-investment-management-group">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .brand-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-[#2b2b2b] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-[#bf8660] selection:text-black antialiased">
+
+    <header class="max-w-4xl w-full mx-auto px-6 pt-12 pb-4 text-left flex flex-col gap-4 border-b border-[#4a4a4a]/40">
+        <a href="https://precisiongrowthpartners.io/" target="_blank" rel="noopener noreferrer" class="inline-block hover:opacity-80 transition-opacity">
+            <img src="https://framerusercontent.com/images/S8VQesQNIT2grrkBle7vzbRnVZc.png?scale-down-to=512&width=8000&height=4500" 
+                alt="Precision Growth Partners Logo" 
+                class="w-28 sm:w-44 h-auto object-contain block">
+        </a> 
+        <div>
+            <h1 class="text-3xl lg:text-5xl font-bold tracking-tight text-white mb-2 sm:mb-1">ACANSA INVESTMENT MANAGEMENT GROUP, LLC</h1>
+            <p class="text-sm sm:text-md text-[#bf8660] font-medium tracking-wide uppercase">We studied 5 years of your firm's data. Here's what we found.</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl w-full mx-auto px-6 py-10 flex-1 space-y-10">
+        
+        <section class="w-full">
+            <div class="bg-[#1f1f1f] rounded-2xl border border-[#4a4a4a]/60 p-8 shadow-2xl relative ring-1 ring-[#4a4a4a]/40">
+                <h4 class="text-xs font-bold text-[#bf8660] uppercase tracking-widest mb-3">Strategic ADVantage Briefing</h4>
+                <p class="text-base sm:text-lg text-slate-200 font-light leading-relaxed">
+                    "Acansa Investment Management Group has quietly built something rare — nearly $900 million in AUM managed by what is, in practice, a single-advisor operation serving a single institutional relationship. That is not a business. That is a hostage situation dressed in a pitch deck. And the most dangerous part? Your website offers no lifeline. No differentiated value proposition, no institutional credibility signals, no niche positioning that would allow a second or third mandate to find you, evaluate you, and trust you enough to write a check. You have constructed an extraordinary proof of capability — managing a near-billion-dollar book with surgical precision — yet you have built zero infrastructure to convert that proof into a diversified, scalable revenue engine. When your sole advisor carried $902M alone in 2024, you were one resignation letter, one health event, or one client board vote away from a firm-ending event. The re-hire in 2026 stabilized headcount, but the $65M AUM decline that followed it reveals a deeper structural truth: talent transitions destabilize your entire book because there is no system beneath the relationships, no marketing engine generating pipeline, and no discretionary mandate framework that would allow new clients to onboard without a bespoke, high-touch negotiation every single time. Your website, meanwhile, greets institutional allocators and investment committees with a generic name and silence — no AUM credibility, no client archetype, no articulation of what Acansa actually solves for the fiduciaries sitting across the table from you. The strategic imperative is not a rebrand. It is an existential pivot: build the client diversification narrative, the discretionary onboarding infrastructure, and the institutional positioning architecture that transforms Acansa from a single-mandate dependency into a defensible, multi-client OCIO and fiduciary platform — before the one relationship that funds everything decides it no longer needs you."
+                </p>
+            </div>
+            <p class="text-center text-xs text-slate-400 mt-3 font-light tracking-wide italic">Custom dynamic narrative engineered from longitudinal SEC data vectors</p>
+        </section>
+
+        <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
+            <a href="https://calendly.com/precisiongrowthpartners/nadir-discovery-call" 
+               target="_blank"
+               class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
+                Book a 15-min Discovery Call
+            </a>
+        </div>
+
+        <hr class="border-[#4a4a4a]/30 my-2">
+
+        <section class="bg-[#2b2b2b] border border-[#4a4a4a]/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-[#bf8660]"></div>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xs font-semibold tracking-widest text-white uppercase">5-Year Growth Trail</h2>
+                <span class="text-[10px] text-slate-500 font-mono">Source: SEC Form ADV Part 1A Matrix</span>
+            </div>
+            <div class="h-64 relative w-full">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AUM Growth (5yr)</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">16%</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AVG AUM per Advisor</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$419M</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">Avg Client Size</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$419,000K</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">HNW % of Book</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">0%</span>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#bf8660]"></span> Capacity Diagnostics
+                </h4>
+                <ul class="space-y-3">
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-[#bf8660] font-mono">•</span> <span>Extreme client concentration risk: across all five years the firm manages only 1-2 non-discretionary accounts with zero discretionary accounts, meaning 100% of AUM (~$720M-$903M) is held by a single institutional or ultra-large mandate relationship; the loss of even one account would be catastrophic to revenue and firm viability, signaling an urgent need for client diversification strategy.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-[#bf8660] font-mono">•</span> <span>Chronic absence of discretionary authority and marketing infrastructure: disc_aum remains $0 and disc_pct_aum is 0.0 across the entire 2022-2026 period, combined with has_marketing_infrastructure flagged false every year, indicating the firm has never built the sales, compliance, or operational infrastructure needed to attract and onboard fee-paying discretionary clients, severely limiting scalable revenue growth beyond its current captive mandate.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-[#bf8660] font-mono">•</span> <span>Severe advisor capacity instability and succession vulnerability: advisor headcount dropped from 2 to 1 in 2024-2025 while AUM surged to $902M, placing the entire book on a single advisor at over $900M AUM per advisor; the subsequent re-hire of a second advisor in 2026 coincided with an AUM decline of ~$65M, suggesting the firm lacks a structured talent pipeline, succession plan, or onboarding process capable of sustaining growth without key-person disruption.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Positioning Audits
+                </h4>
+                <ul class="space-y-3">
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-slate-400 font-mono">•</span> <span>The homepage lacks a clear, differentiated value proposition or hero statement — visitors see only a generic tagline ('Investment Management Group') with no immediate explanation of who Acansa specifically serves, what measurable outcomes they deliver, or why they are the superior choice over competing OCIO and fiduciary advisory firms.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-slate-400 font-mono">•</span> <span>There is a complete absence of social proof, credibility signals, or trust indicators — no client testimonials, AUM figures, years in business, notable institutional clients, case studies, or third-party recognitions — leaving prospective financial advisors and institutional decision-makers with no evidence that Acansa has a proven track record.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-slate-400 font-mono">•</span> <span>The site provides no targeted ideal client profile or niche positioning — the only descriptor used is 'client institutions,' which is vague and fails to speak directly to the specific pain points, mandates, or decision-making contexts of the financial advisors, investment committees, or institutional allocators Acansa is trying to attract, making it impossible for a visitor to self-qualify.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
+            <a href="https://calendly.com/precisiongrowthpartners/nadir-discovery-call" 
+               target="_blank"
+               class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
+                Book a 15-min Discovery Call
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="w-full border-t border-[#4a4a4a]/30 bg-[#2b2b2b] py-8 text-center px-6 space-y-2">
+        <p class="text-xs text-slate-400 font-light tracking-wide">Secure PGP Protected ADVantage Array Engine</p>
+        <p class="text-[10px] text-slate-500 max-w-2xl mx-auto leading-normal font-light">
+            Analysis built natively using verified, publicly accessible SEC Form ADV Part 1A filings historical dataset matrices (2022–2026).
+        </p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023', '2024', '2025', '2026'],
+                datasets: [{
+                    label: 'Total AUM ($M)',
+                    data: [720, 700, 757, 903, 838],
+                    backgroundColor: '#bf8660', 
+                    borderColor: '#bf8660',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }, {
+                    label: 'HNW AUM ($M)',
+                    data: [0, 0, 0, 0, 0],
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)', 
+                    borderColor: 'rgba(255, 255, 255, 0.4)',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: { color: '#e2e8f0', font: { family: 'Poppins', size: 11, weight: '500' } } 
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { size: 11, family: 'Poppins' } } },
+                    y: { grid: { color: 'rgba(74, 74, 74, 0.25)' }, ticks: { color: '#cbd5e1' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
