@@ -132,32 +132,60 @@ def generate_landing_page(target_crd):
     aum_end = aum_data_points[-1]
     aum_growth_pct = round(((aum_end - aum_start) / aum_start) * 100) if aum_start > 0 else 0
     
-    # Back-calculate HNW percentage using our verified chart arrays to bypass missing keys
+    # Calculate HNW book percentage using the verified auto-scaled matrix arrays
     if aum_data_points[-1] > 0:
         hnw_pct = round((hnw_data_points[-1] / aum_data_points[-1]) * 100)
     else:
         hnw_pct = 0
 
-    # Handle AUM per advisor scaling
-    raw_apa = f26.get('aum_per_advisor', 0)
-    if raw_apa > 1e6:
-        aum_per_advisor = f"${round(raw_apa / 1e6)}M"
-    elif raw_apa > 0:
-        aum_per_advisor = f"${round(raw_apa)}M"
-    else:
-        aum_per_advisor = "N/A"
+    # HELPER UTILITY: Dynamic Currency Auto-Scaler (Intelligently maps whole $, K, and M scales)
+    def format_smart_currency(raw_value, force_millions=False):
+        if not raw_value:
+            return "N/A"
+        try:
+            val = float(raw_value)
+            if val <= 0:
+                return "N/A"
+            
+            # Case A: If it's explicitly an AUM-level variable already pre-scaled to Millions (like 153)
+            if force_millions:
+                if val >= 1000:
+                    return f"${val/1000:.1f}B"
+                return f"${round(val)}M"
+                
+            # Case B: Standard whole dollar inputs auto-detecting breakpoint distributions
+            if val >= 1e9:
+                return f"${val / 1e9:.1f}B"
+            elif val >= 1e6:
+                return f"${val / 1e6:.1f}M"
+            elif val >= 1e3:
+                # If it's an even thousand number, format as $765K, else keep the clean comma ($765,524)
+                if val % 1000 == 0:
+                    return f"${round(val / 1e3)}K"
+                return f"${round(val):,}"
+            else:
+                return f"${round(val)}"
+        except (ValueError, TypeError):
+            return "N/A"
+
+    # 🌟 APPLY DYNAMIC SCALING TO SNAPSHOT CARDS
     
-    # 🌟 RECALIBRATED AVERAGE CLIENT SIZE: Detects if the number is pre-scaled or whole dollars
+    # 1. AUM Per Advisor Snapshot Format Mapping
+    raw_apa = f26.get('aum_per_advisor', 0)
+    # Detect if the source value is already pre-scaled to millions or raw dollars
+    if raw_apa > 0 and raw_apa < 1e4:
+        aum_per_advisor = format_smart_currency(raw_apa, force_millions=True)
+    else:
+        aum_per_advisor = format_smart_currency(raw_apa)
+
+    # 2. Average Client Size Snapshot Format Mapping
     raw_avg_size = f26.get('avg_account_size', 0) or f26.get('avg_client_size', 0) or 0
-    try:
-        val_size = float(raw_avg_size)
-        # If the value is over $10M, it's likely a whole firm segment, not a single client average. 
-        # If it's reading $419,000,000, we divide down to restore the true client average ($419,000).
-        if val_size > 1e7:
-            val_size = val_size / 1e3
-        avg_client_size = f"${round(val_size):,}"
-    except (ValueError, TypeError):
-        avg_client_size = "N/A"
+    # Guardrail: If data engine accidentally passed total firm assets as average size, auto-downscale
+    if raw_avg_size > 1e8:
+        raw_avg_size = raw_avg_size / 1e3
+        
+    avg_client_size = format_smart_currency(raw_avg_size)
+
     # HTML Template Layout
     html_template = f"""<!DOCTYPE html>
 <html lang="en">
