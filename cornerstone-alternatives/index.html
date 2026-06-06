@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADVantage Review: CORNERSTONE ALTERNATIVES</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Custom 5-Year Growth Analytics for CORNERSTONE ALTERNATIVES">
+    <meta property="og:url" content="https://advantage.precisiongrowthpartners.io/cornerstone-alternatives">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .brand-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-[#2b2b2b] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-[#bf8660] selection:text-black antialiased">
+
+    <header class="max-w-4xl w-full mx-auto px-6 pt-12 pb-4 text-left flex flex-col gap-4 border-b border-[#4a4a4a]/40">
+        <a href="https://precisiongrowthpartners.io/" target="_blank" rel="noopener noreferrer" class="inline-block hover:opacity-80 transition-opacity">
+            <img src="https://framerusercontent.com/images/S8VQesQNIT2grrkBle7vzbRnVZc.png?scale-down-to=512&width=8000&height=4500" 
+                alt="Precision Growth Partners Logo" 
+                class="w-28 sm:w-44 h-auto object-contain block">
+        </a> 
+        <div>
+            <h1 class="text-3xl lg:text-5xl font-bold tracking-tight text-white mb-2 sm:mb-1">CORNERSTONE ALTERNATIVES</h1>
+            <p class="text-sm sm:text-md text-[#bf8660] font-medium tracking-wide uppercase">We studied 5 years of your firm's data. Here's what we found.</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl w-full mx-auto px-6 py-10 flex-1 space-y-10">
+        
+        <section class="bg-[#2b2b2b] border border-[#4a4a4a]/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-[#bf8660]"></div>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xs font-semibold tracking-widest text-white uppercase">5-Year Growth Trail</h2>
+                <span class="text-[10px] text-slate-500 font-mono">Source: SEC Form ADV Part 1A Matrix</span>
+            </div>
+            <div class="h-64 relative w-full">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AUM Growth (5yr)</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">0%</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AVG AUM per Advisor</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$79.68M</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">Avg Client Size</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$377K</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">HNW % of Book</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">100%</span>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#bf8660]"></span> Capacity Diagnostics
+                </h4>
+                <ul class="space-y-4">
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Advisor Scale Ceiling</span>
+                                <span class="text-slate-300 font-light block mb-1">The rapid AUM growth Cornerstone achieved is a direct testament to the depth of trust your advisory team has cultivated — reaching $181M with just two advisors is a remarkable proof point of relationship quality.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Introducing a structured advisor capacity framework — whether through a third licensed advisor, a tiered service model, or a defined client segmentation protocol — would immediately reduce concentration risk and create the operational headroom needed to absorb the next wave of AUM growth without service degradation.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Client Segment Resilience</span>
+                                <span class="text-slate-300 font-light block mb-1">Cornerstone's HNW client base represents a highly curated, high-trust constituency that speaks to the firm's ability to attract and retain sophisticated capital at meaningful scale.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Deliberately expanding into adjacent segments — such as emerging affluent accredited investors or institutional family office relationships — would distribute revenue risk across multiple behavioral profiles and create a self-reinforcing referral ecosystem that is no longer dependent on a single segment's sentiment or liquidity decisions.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Discretionary Mandate Activation</span>
+                                <span class="text-slate-300 font-light block mb-1">The firm's move to 2.2% discretionary AUM in 2026 signals an early and meaningful shift toward a more scalable advisory mandate structure — a strategic instinct that reflects sound long-term thinking.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Accelerating discretionary adoption through a clearly defined investment policy framework and a proactive client communication strategy would unlock compounding efficiency gains, reduce advisor time-per-client, and position Cornerstone to grow AUM without proportionally growing overhead.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Positioning Audits
+                </h4>
+                <ul class="space-y-4">
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Ideal Client Clarity</span>
+                                <span class="text-slate-300 font-light block mb-1">Cornerstone's website reflects the firm's deep expertise in alternative investments, but the absence of a defined ideal client profile means that the right prospects — accredited investors, HNW individuals, and advisor partners — cannot immediately see themselves in your story.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Articulating a precise client qualification narrative on your site — one that speaks directly to the sophistication, goals, and access expectations of your target audience — would dramatically increase conversion intent and ensure that every inbound inquiry arrives pre-qualified and pre-aligned.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Credibility Signal Architecture</span>
+                                <span class="text-slate-300 font-light block mb-1">The trust Cornerstone has earned through years of relationship-driven performance is real and substantial, yet the website currently offers no visible proof points — no AUM milestones, no due diligence methodology, and no track record signals — that would allow a new prospect to independently validate that trust.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Introducing a curated credibility layer — whether through anonymized performance context, a published fund selection framework, or a transparent due diligence narrative — would give Cornerstone the ability to earn trust at scale, converting cold discovery into warm conviction before the first conversation ever takes place.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Advisor-Centric Positioning</span>
+                                <span class="text-slate-300 font-light block mb-1">The current messaging does an admirable job of establishing Cornerstone's commitment to the alternatives space, but it speaks primarily to what alternative investments are rather than to the specific operational and relational problems Cornerstone solves for the advisors and clients it serves.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Repositioning the core value proposition around advisor pain points — such as deal sourcing complexity, subscription navigation, and client education burden — would transform Cornerstone's brand from an investment platform into an indispensable strategic partner, commanding deeper loyalty and unlocking a far more scalable referral and distribution channel.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+        </section>
+
+        <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
+            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
+               target="_blank"
+               class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
+                Book a 15-min Discovery Call
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="w-full border-t border-[#4a4a4a]/30 bg-[#2b2b2b] py-8 text-center px-6 space-y-2">
+        <p class="text-xs text-slate-400 font-light tracking-wide">Secure PGP Protected ADVantage Array Engine</p>
+        <p class="text-[10px] text-slate-500 max-w-2xl mx-auto leading-normal font-light">
+            Analysis built natively using verified, publicly accessible SEC Form ADV Part 1A filings historical dataset matrices (2022–2026).
+        </p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023', '2024', '2025', '2026'],
+                datasets: [{
+                    label: 'Total AUM ($M)',
+                    data: [0, 0, 51, 181, 159],
+                    backgroundColor: '#bf8660', 
+                    borderColor: '#bf8660',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }, {
+                    label: 'HNW AUM ($M)',
+                    data: [0, 0, 37, 181, 159],
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)', 
+                    borderColor: 'rgba(255, 255, 255, 0.4)',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: { color: '#e2e8f0', font: { family: 'Poppins', size: 11, weight: '500' } } 
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { size: 11, family: 'Poppins' } } },
+                    y: { grid: { color: 'rgba(74, 74, 74, 0.25)' }, ticks: { color: '#cbd5e1' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
