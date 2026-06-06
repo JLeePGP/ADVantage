@@ -138,12 +138,15 @@ def generate_landing_page(target_crd):
     else:
         hnw_pct = 0
 
-# HELPER UTILITY: Dynamic Currency Auto-Scaler (Enforces clean 3-digit dashboard notation)
+    # HELPER UTILITY: Dynamic Currency Auto-Scaler (Cleans raw strings and enforces compact notation)
     def format_smart_currency(raw_value, force_millions=False):
         if not raw_value:
             return "N/A"
         try:
-            val = float(raw_value)
+            # 🌟 STRIP NOISE: Convert to string, remove $, commas, and spaces so float() doesn't break
+            clean_str = str(raw_value).replace("$", "").replace(",", "").strip()
+            val = float(clean_str)
+            
             if val <= 0:
                 return "N/A"
             
@@ -159,12 +162,13 @@ def generate_landing_page(target_crd):
             elif val >= 1e6:
                 return f"${val / 1e6:.2f}M".replace(".00", "")
             elif val >= 1e3:
-                # If it's over $10K, round cleanly to the nearest whole thousand for dashboard notation
+                # Rounds cleanly to the nearest whole thousand for dashboard notation (e.g. 765524 -> 766K)
                 return f"${round(val / 1e3)}K"
             else:
                 return f"${round(val)}"
         except (ValueError, TypeError):
-            return "N/A"
+            # Fallback if it's completely unparseable text
+            return str(raw_value)
 
     # 🌟 APPLY DYNAMIC COMPACT SCALING TO SNAPSHOT CARDS
     
