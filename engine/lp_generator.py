@@ -138,7 +138,7 @@ def generate_landing_page(target_crd):
     else:
         hnw_pct = 0
 
-    # HELPER UTILITY: Dynamic Currency Auto-Scaler (Intelligently maps whole $, K, and M scales)
+# HELPER UTILITY: Dynamic Currency Auto-Scaler (Enforces clean 3-digit dashboard notation)
     def format_smart_currency(raw_value, force_millions=False):
         if not raw_value:
             return "N/A"
@@ -147,32 +147,29 @@ def generate_landing_page(target_crd):
             if val <= 0:
                 return "N/A"
             
-            # Case A: If it's explicitly an AUM-level variable already pre-scaled to Millions (like 153)
+            # Case A: If it's an AUM-level variable already pre-scaled to Millions (like 153)
             if force_millions:
                 if val >= 1000:
-                    return f"${val/1000:.1f}B"
+                    return f"${val/1000:.2f}B".replace(".00", "")
                 return f"${round(val)}M"
                 
             # Case B: Standard whole dollar inputs auto-detecting breakpoint distributions
             if val >= 1e9:
-                return f"${val / 1e9:.1f}B"
+                return f"${val / 1e9:.2f}B".replace(".00", "")
             elif val >= 1e6:
-                return f"${val / 1e6:.1f}M"
+                return f"${val / 1e6:.2f}M".replace(".00", "")
             elif val >= 1e3:
-                # If it's an even thousand number, format as $765K, else keep the clean comma ($765,524)
-                if val % 1000 == 0:
-                    return f"${round(val / 1e3)}K"
-                return f"${round(val):,}"
+                # If it's over $10K, round cleanly to the nearest whole thousand for dashboard notation
+                return f"${round(val / 1e3)}K"
             else:
                 return f"${round(val)}"
         except (ValueError, TypeError):
             return "N/A"
 
-    # 🌟 APPLY DYNAMIC SCALING TO SNAPSHOT CARDS
+    # 🌟 APPLY DYNAMIC COMPACT SCALING TO SNAPSHOT CARDS
     
     # 1. AUM Per Advisor Snapshot Format Mapping
     raw_apa = f26.get('aum_per_advisor', 0)
-    # Detect if the source value is already pre-scaled to millions or raw dollars
     if raw_apa > 0 and raw_apa < 1e4:
         aum_per_advisor = format_smart_currency(raw_apa, force_millions=True)
     else:
@@ -180,7 +177,6 @@ def generate_landing_page(target_crd):
 
     # 2. Average Client Size Snapshot Format Mapping
     raw_avg_size = f26.get('avg_account_size', 0) or f26.get('avg_client_size', 0) or 0
-    # Guardrail: If data engine accidentally passed total firm assets as average size, auto-downscale
     if raw_avg_size > 1e8:
         raw_avg_size = raw_avg_size / 1e3
         
