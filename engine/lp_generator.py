@@ -133,26 +133,6 @@ def generate_landing_page(target_crd):
 
     <main class="max-w-4xl w-full mx-auto px-6 py-10 flex-1 space-y-10">
         
-        <section class="w-full">
-            <div class="bg-[#1f1f1f] rounded-2xl border border-[#4a4a4a]/60 p-8 shadow-2xl relative ring-1 ring-[#4a4a4a]/40">
-                <h4 class="text-xs font-bold text-[#bf8660] uppercase tracking-widest mb-3">Strategic ADVantage Briefing</h4>
-                <p class="text-base sm:text-lg text-slate-200 font-light leading-relaxed">
-                    "{story_hook}"
-                </p>
-            </div>
-            <p class="text-center text-xs text-slate-400 mt-3 font-light tracking-wide italic">Custom dynamic narrative engineered from longitudinal SEC data vectors</p>
-        </section>
-
-        <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
-            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
-               target="_blank"
-               class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
-                Book a 15-min Discovery Call
-            </a>
-        </div>
-
-        <hr class="border-[#4a4a4a]/30 my-2">
-
         <section class="bg-[#2b2b2b] border border-[#4a4a4a]/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 left-0 w-1 h-full bg-[#bf8660]"></div>
             <div class="flex items-center justify-between mb-6">
@@ -299,11 +279,16 @@ def generate_landing_page(target_crd):
         subprocess.run("git push origin main", shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         
         os.chdir(script_dir)
+
         site_verification = config.get('NETLIFY_SITE_ID', 'unlinked')
         
-        print(f"\n[✔] SUCCESS: Custom ADVantage array deployed on complete autopilot! (Site Ref: {site_verification[:8]}...)")
+        print(f"\n[✔] SUCCESS: Custom telemetry array deployed on complete autopilot!")
         print(f"    Live Secure URL: https://advantage.precisiongrowthpartners.io/{url_slug}")
-        
+        print("\n" + "═"*75)
+        print(" 🎙️ INTERNAL OPERATOR BRIEFING SCRIPT (READ TO PROSPECT / JUDGES):")
+        print("═"*75)
+        print(f'\n "{story_hook}" \n')
+        print("═"*75 + "\n") 
     except subprocess.CalledProcessError as e:
         print(f"  [!] Git command failed to execute natively: {str(e)}")
         os.chdir(script_dir)
