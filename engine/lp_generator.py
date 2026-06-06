@@ -8,28 +8,24 @@ import os
 import json
 import sys
 import subprocess
+import re
 from pathlib import Path
 
 current_script_dir = Path(__file__).resolve().parent
 project_root = current_script_dir.parent
 INPUT_JSON = project_root / "data" / "output" / "financial_profiles.json"
 CONFIG_PATH = project_root / "advantage_config.json"
-
-# Crucial Path Correction: We want to write the HTML file directly into the 
-# folder that Netlify tracks. If your linked repository deploys from a folder 
-# named 'previews', we keep it. If it deploys from your repository root, change this to project_root.
 OUTPUT_DIR = project_root / "previews"
 
 def generate_landing_page(target_crd):
     """
     Transforms true multi-agent diagnostic outputs into the PGP HTML template structure,
-    then automatically executes a Git deployment loop to trigger Netlify's build hooks.
+    then automatically executes your precise Git deployment loop to trigger Netlify.
     """
     print("=" * 75)
-    print(f" 🎨 PROJECT ADVANTAGE — COGNITIVE PGP LANDING PAGE CONTEXT ENGINE")
+    print(f" 🎨 PROJECT ADVANTAGE — GENERATING DYNAMIC PGP LANDING PAGE")
     print("=" * 75)
     
-    # 1. Initialize configuration states cleanly
     if not CONFIG_PATH.exists():
         print("[!] ERROR: advantage_config.json missing from workspace.")
         return
@@ -49,14 +45,12 @@ def generate_landing_page(target_crd):
         
     firm = profiles[str(target_crd)]
     
-    # Isolate calculation dictionary states
     identity = firm.get("identity", {})
     derived = firm.get("derived_metrics", {})
     history = firm.get("history", {})
     
     firm_name = identity.get("firm_name", "Your Practice").strip()
     
-    # Extract structural dynamic agent content strings
     inferences = firm.get("financial_inferences", [])
     gaps = firm.get("marketing_gaps", [])
     story_hook = firm.get("story_hook", "")
@@ -65,7 +59,14 @@ def generate_landing_page(target_crd):
         print(f"[!] ERROR: Missing agent states for CRD #{target_crd}. Run main.py stages 1-3 first.")
         return
 
-    # Map comprehensive 5-year data vectors for Chart.js
+    # SLUG GENERATION: Turn "IKE CAPITAL, LLC" into "ike-capital"
+    raw_name = identity.get("firm_name", "your-practice").strip().lower()
+    for extension in ["llc", "l.l.c.", "inc.", "inc", "corp", "co.", "limited", "ltd.", "ltd"]:
+        if raw_name.endswith(extension):
+            raw_name = raw_name.rsplit(extension, 1)[0].strip()
+    url_slug = re.sub(r'[^a-z0-9]+', '-', raw_name).strip('-')
+
+    # Data Mappings for Chart.js
     years_5 = ["2022", "2023", "2024", "2025", "2026"]
     aum_by_year_dict = derived.get("aum_by_year_m", {})
     aum_data_points = [round(aum_by_year_dict.get(yr, 0.0)) for yr in years_5]
@@ -76,7 +77,7 @@ def generate_landing_page(target_crd):
         hnw_raw = yr_data.get("hnw_aum_raw", 0.0) if yr_data else 0.0
         hnw_data_points.append(round(hnw_raw / 1e6))
 
-    # Calculate metrics snapshots into clean whole integers
+    # Metric Snapshot Calculations
     f26 = history.get("2026", history.get(2026, {}))
     aum_start = aum_by_year_dict.get(years_5[0], 0.0)
     aum_end = aum_by_year_dict.get(years_5[-1], 0.0)
@@ -88,20 +89,17 @@ def generate_landing_page(target_crd):
     aum_per_advisor = f"${round(f26.get('aum_per_advisor', 0) / 1e6)}M" if f26.get('aum_per_advisor', 0) else "N/A"
     avg_client_size = f"${round(f26.get('avg_account_size', 0) / 1e3):,}K" if f26.get('avg_account_size', 0) else "N/A"
 
-    # Define URL production slug mapping variable
-    url_slug = f"crd-{target_crd}"
-
-    # Pure, unadulterated PGP Poppins theme template adaptation layout
+    # HTML Template Layout
     html_template = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telemetry Review: {firm_name}</title>
+    <title>ADVantage Review: {firm_name}</title>
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Custom 5-Year Growth Analytics for {firm_name}">
-    <meta property="og:url" content="https://telemetry.precisiongrowthpartners.io/{url_slug}">
+    <meta property="og:url" content="https://advantage.precisiongrowthpartners.io/{url_slug}">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -129,7 +127,7 @@ def generate_landing_page(target_crd):
         
         <section class="w-full">
             <div class="bg-[#1f1f1f] rounded-2xl border border-[#4a4a4a]/60 p-8 shadow-2xl relative ring-1 ring-[#4a4a4a]/40">
-                <h4 class="text-xs font-bold text-[#bf8660] uppercase tracking-widest mb-3">Strategic Telemetry Briefing</h4>
+                <h4 class="text-xs font-bold text-[#bf8660] uppercase tracking-widest mb-3">Strategic ADVantage Briefing</h4>
                 <p class="text-base sm:text-lg text-slate-200 font-light leading-relaxed">
                     "{story_hook}"
                 </p>
@@ -138,7 +136,7 @@ def generate_landing_page(target_crd):
         </section>
 
         <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
-            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
+            <a href="https://calendly.com/precisiongrowthpartners/nadir-discovery-call" 
                target="_blank"
                class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
                 Book a 15-min Discovery Call
@@ -214,7 +212,7 @@ def generate_landing_page(target_crd):
         </section>
 
         <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
-            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
+            <a href="https://calendly.com/precisiongrowthpartners/nadir-discovery-call" 
                target="_blank"
                class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
                 Book a 15-min Discovery Call
@@ -224,7 +222,7 @@ def generate_landing_page(target_crd):
     </main>
 
     <footer class="w-full border-t border-[#4a4a4a]/30 bg-[#2b2b2b] py-8 text-center px-6 space-y-2">
-        <p class="text-xs text-slate-400 font-light tracking-wide">Secure PGP Protected Telemetry Array Engine</p>
+        <p class="text-xs text-slate-400 font-light tracking-wide">Secure PGP Protected ADVantage Array Engine</p>
         <p class="text-[10px] text-slate-500 max-w-2xl mx-auto leading-normal font-light">
             Analysis built natively using verified, publicly accessible SEC Form ADV Part 1A filings historical dataset matrices (2022–2026).
         </p>
@@ -276,32 +274,35 @@ def generate_landing_page(target_crd):
 </html>
 """
     
-    # Write the compiled static HTML asset locally inside the previews directory tree
+    # Save the file locally matching the URL safe slug exactly
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    destination_path = OUTPUT_DIR / f"presentation_{target_crd}.html"
+    destination_path = OUTPUT_DIR / f"{url_slug}.html"
     with open(destination_path, "w", encoding="utf-8") as fh:
         fh.write(html_template)
     print(f" -> Compiled unique presentation layout locally at: previews/{destination_path.name}")
 
-    # ── STEP 5: AUTOMATED DEPLOYMENT PUSH TO GITHUB/NETLIFY ────────────────
-    print(" Syncing incremental directory tree to GitHub repository...")
-    script_dir = os.getcwd()
-    
+    # ── AUTOMATED DEPLOYMENT PUSH TO GITHUB/NETLIFY ───────────────────────
+    print("  Syncing incremental directory tree to GitHub repository...")
     try:
-        # Secure the repository root execution context path smoothly
+        # Cache current position
+        script_dir = os.getcwd()
+        
+        # Move up to project root folder context
         os.chdir(project_root)
         
-        # Execute Git update streams silently from root tree frame context
+        # Execute automated Git command sequence natively
         subprocess.run("git add .", shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        subprocess.run(f'git commit --allow-empty -m "Automated telemetry deploy: {url_slug}"', shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(f'git commit --allow-empty -m "Automated ADVantage deploy: {url_slug}"', shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("git push origin main", shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         
-        # Return safely back to standard operational workspace directory track loops
+        # Return safely to execution directory tracker context
         os.chdir(script_dir)
         
         site_verification = config.get('NETLIFY_SITE_ID', 'unlinked')
-        print(f"\n[✔] SUCCESS: Custom telemetry array deployed on complete autopilot! (Site Ref: {site_verification[:8]}...)")
-        print(f"    Live Secure URL: https://telemetry.precisiongrowthpartners.io/{url_slug}")
+        
+        # 🌟 UPDATED: Success panel print strings optimized to reference advantage subdomain
+        print(f"\n[✔] SUCCESS: Custom ADVantage array deployed on complete autopilot! (Site Ref: {site_verification[:8]}...)")
+        print(f"    Live Secure URL: https://advantage.precisiongrowthpartners.io/{url_slug}")
         
     except subprocess.CalledProcessError as e:
         print(f"  [!] Git command failed to execute natively: {str(e)}")
