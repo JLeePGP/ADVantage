@@ -74,28 +74,66 @@ def generate_landing_page(target_crd):
     destination_path = firm_folder_path / "index.html"
     print(f" -> System check: Creating directory structure at: {firm_folder_path.name}/index.html")
 
-    # Data Mappings for Chart.js
+    # 🌟 NEW DEFENSIVE DATA PIPELINE FOR HNW SNAPSHOTS & CLEAN METRICS
     years_5 = ["2022", "2023", "2024", "2025", "2026"]
     aum_by_year_dict = derived.get("aum_by_year_m", {})
     aum_data_points = [round(aum_by_year_dict.get(yr, 0.0)) for yr in years_5]
     
     hnw_data_points = []
     for yr in years_5:
-        yr_data = history.get(yr, {})
-        hnw_raw = yr_data.get("hnw_aum_raw", 0.0) if yr_data else 0.0
-        hnw_data_points.append(round(hnw_raw / 1e6))
+        yr_data = history.get(yr, {}) or history.get(int(yr), {})
+        
+        # 1. Look for direct raw or scaled HNW values
+        hnw_raw = yr_data.get("hnw_aum_raw") or yr_data.get("hnw_aum") or yr_data.get("hnw_assets", 0.0)
+        
+        try:
+            hnw_val = float(hnw_raw)
+        except (ValueError, TypeError):
+            hnw_val = 0.0
+            
+        # 2. Dynamic Calculation Fallback: Compute if direct value is missing
+        if hnw_val == 0.0:
+            ratio = yr_data.get("hnw_dependency_ratio") or yr_data.get("hnw_pct") or derived.get("hnw_dependency_by_year", {}).get(yr, 0.0)
+            try:
+                float_ratio = float(ratio)
+                if float_ratio > 1.0:
+                    float_ratio = float_ratio / 100.0
+                
+                total_aum_m = aum_by_year_dict.get(yr, 0.0)
+                hnw_val = total_aum_m * float_ratio * 1e6
+            except (ValueError, TypeError):
+                hnw_val = 0.0
+
+        if hnw_val > 1e4:
+            hnw_data_points.append(round(hnw_val / 1e6))
+        else:
+            hnw_data_points.append(round(hnw_val))
 
     # Metric Snapshot Calculations
-    f26 = history.get("2026", history.get(2026, {}))
+    f26 = history.get("2026", history.get(2026, {})) or {}
     aum_start = aum_by_year_dict.get(years_5[0], 0.0)
     aum_end = aum_by_year_dict.get(years_5[-1], 0.0)
     aum_growth_pct = round(((aum_end - aum_start) / aum_start) * 100) if aum_start > 0 else 0
     
-    hnw_ratio_raw = f26.get("hnw_dependency_ratio", derived.get("hnw_dependency_by_year", {}).get("2026", 0.0))
-    hnw_pct = round(float(hnw_ratio_raw) * 100)
+    # Unified 2026 HNW Percentage Metric Snapshot Box calculation
+    hnw_ratio_raw = f26.get("hnw_dependency_ratio") or f26.get("hnw_pct") or derived.get("hnw_dependency_by_year", {}).get("2026", 0.0)
+    try:
+        hnw_float = float(hnw_ratio_raw)
+        if hnw_float < 1.0 and hnw_float > 0:
+            hnw_pct = round(hnw_float * 100)
+        else:
+            hnw_pct = round(hnw_float)
+    except (ValueError, TypeError):
+        if aum_data_points[-1] > 0:
+            hnw_pct = round((hnw_data_points[-1] / aum_data_points[-1]) * 100)
+        else:
+            hnw_pct = 0
 
     aum_per_advisor = f"${round(f26.get('aum_per_advisor', 0) / 1e6)}M" if f26.get('aum_per_advisor', 0) else "N/A"
-    avg_client_size = f"${round(f26.get('avg_account_size', 0) / 1e3):,}K" if f26.get('avg_account_size', 0) else "N/A"
+    
+    # 🌟 FIXED AVERAGE CLIENT SIZE FORMATTER: Dropped /1e3 division and 'K' suffix
+    raw_avg_size = f26.get('avg_account_size', 0) or f26.get('avg_client_size', 0)
+    avg_client_size = f"${round(raw_avg_size):,}" if raw_avg_size else "N/A"
 
     # HTML Template Layout
     html_template = f"""<!DOCTYPE html>
