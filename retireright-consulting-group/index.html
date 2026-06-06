@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADVantage Review: RETIRERIGHT CONSULTING GROUP</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Custom 5-Year Growth Analytics for RETIRERIGHT CONSULTING GROUP">
+    <meta property="og:url" content="https://advantage.precisiongrowthpartners.io/retireright-consulting-group">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .brand-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-[#2b2b2b] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-[#bf8660] selection:text-black antialiased">
+
+    <header class="max-w-4xl w-full mx-auto px-6 pt-12 pb-4 text-left flex flex-col gap-4 border-b border-[#4a4a4a]/40">
+        <a href="https://precisiongrowthpartners.io/" target="_blank" rel="noopener noreferrer" class="inline-block hover:opacity-80 transition-opacity">
+            <img src="https://framerusercontent.com/images/S8VQesQNIT2grrkBle7vzbRnVZc.png?scale-down-to=512&width=8000&height=4500" 
+                alt="Precision Growth Partners Logo" 
+                class="w-28 sm:w-44 h-auto object-contain block">
+        </a> 
+        <div>
+            <h1 class="text-3xl lg:text-5xl font-bold tracking-tight text-white mb-2 sm:mb-1">RETIRERIGHT CONSULTING GROUP</h1>
+            <p class="text-sm sm:text-md text-[#bf8660] font-medium tracking-wide uppercase">We studied 5 years of your firm's data. Here's what we found.</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl w-full mx-auto px-6 py-10 flex-1 space-y-10">
+        
+        <section class="bg-[#2b2b2b] border border-[#4a4a4a]/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-[#bf8660]"></div>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xs font-semibold tracking-widest text-white uppercase">5-Year Growth Trail</h2>
+                <span class="text-[10px] text-slate-500 font-mono">Source: SEC Form ADV Part 1A Matrix</span>
+            </div>
+            <div class="h-64 relative w-full">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AUM Growth (5yr)</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">-6%</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AVG AUM per Advisor</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$112M</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">Avg Client Size</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$765,524</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">HNW % of Book</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">27%</span>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#bf8660]"></span> Capacity Diagnostics
+                </h4>
+                <ul class="space-y-3">
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-[#bf8660] font-mono">•</span> <span>Severe advisor capacity dilution in 2026: adding 2 advisors while total AUM declined ~$97M year-over-year caused AUM-per-advisor to collapse from $219.6M to $112.2M, signaling a poorly timed or unplanned headcount expansion that is destroying per-advisor productivity and likely compressing revenue margins without a corresponding client acquisition strategy to justify the cost.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-[#bf8660] font-mono">•</span> <span>Accelerating HNW concentration risk without a discretionary management framework: the HNW dependency ratio has more than tripled from 8.5% in 2022 to 27.3% in 2026, yet the firm still lacks marketing infrastructure and operates with 60%+ of AUM in non-discretionary accounts, meaning the firm is increasingly reliant on a small cohort of high-net-worth clients it cannot proactively manage or retain through systematic investment mandates, creating acute revenue fragility if even a handful of those relationships depart.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-[#bf8660] font-mono">•</span> <span>Chronic absence of marketing infrastructure combined with volatile and declining AUM CAGR of -1.63% over five years reveals a broken organic growth engine: total client count grew from 350 to 500 yet total AUM shrank 6.38%, indicating the firm is onboarding smaller, lower-value relationships that dilute average account size from $1.34M to $765K, while the persistent 'has_marketing_infrastructure: false' flag across all years confirms there is no systematic pipeline, referral program, or digital acquisition channel to attract and convert higher-value prospects.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Positioning Audits
+                </h4>
+                <ul class="space-y-3">
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-slate-400 font-mono">•</span> <span>The bio contains no value proposition or client-focused messaging — it leads with a regulatory disclosure ('Securities Offered Through LPL Financial, Member FINRA/SIPC') rather than communicating who Henry serves, what problems he solves, or what outcomes clients can expect, making it impossible for a prospective client to self-identify or feel compelled to engage.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-slate-400 font-mono">•</span> <span>There is zero differentiation or niche positioning — the profile offers no indication of a target client segment (e.g., pre-retirees, business owners, women in transition), no specialization, and no unique methodology, leaving Henry indistinguishable from thousands of other LPL-affiliated advisors and giving visitors no reason to choose him over a competitor.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-slate-400 font-mono">•</span> <span>The brand name 'uretireright.com' implies a retirement-only focus but the profile provides no supporting narrative, content strategy, or proof points (such as testimonials, thought leadership posts, or educational content) to reinforce that positioning, creating a credibility gap that erodes trust before a prospect ever visits the website.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
+            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
+               target="_blank"
+               class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
+                Book a 15-min Discovery Call
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="w-full border-t border-[#4a4a4a]/30 bg-[#2b2b2b] py-8 text-center px-6 space-y-2">
+        <p class="text-xs text-slate-400 font-light tracking-wide">Secure PGP Protected ADVantage Array Engine</p>
+        <p class="text-[10px] text-slate-500 max-w-2xl mx-auto leading-normal font-light">
+            Analysis built natively using verified, publicly accessible SEC Form ADV Part 1A filings historical dataset matrices (2022–2026).
+        </p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023', '2024', '2025', '2026'],
+                datasets: [{
+                    label: 'Total AUM ($M)',
+                    data: [599, 505, 586, 659, 561],
+                    backgroundColor: '#bf8660', 
+                    borderColor: '#bf8660',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }, {
+                    label: 'HNW AUM ($M)',
+                    data: [51, 49, 76, 98, 153],
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)', 
+                    borderColor: 'rgba(255, 255, 255, 0.4)',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: { color: '#e2e8f0', font: { family: 'Poppins', size: 11, weight: '500' } } 
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { size: 11, family: 'Poppins' } } },
+                    y: { grid: { color: 'rgba(74, 74, 74, 0.25)' }, ticks: { color: '#cbd5e1' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
