@@ -1,5 +1,5 @@
 """
-ADVantage Presentation Layer -- lp_generator.py (GitHub/Netlify Automation Sync)
+ADVantage Presentation Layer -- lp_generator.py (Directory-Based Deploy Engine)
 ===============================================================================
 Precision Growth Partners | Agentic ABM Infrastructure
 """
@@ -9,21 +9,21 @@ import json
 import sys
 import subprocess
 import re
+import shutil
 from pathlib import Path
 
 current_script_dir = Path(__file__).resolve().parent
 project_root = current_script_dir.parent
 INPUT_JSON = project_root / "data" / "output" / "financial_profiles.json"
 CONFIG_PATH = project_root / "advantage_config.json"
-OUTPUT_DIR = project_root / "previews"
 
 def generate_landing_page(target_crd):
     """
-    Transforms true multi-agent diagnostic outputs into the PGP HTML template structure,
-    then automatically executes your precise Git deployment loop to trigger Netlify.
+    Transforms true multi-agent outputs into an index.html file housed inside 
+    a custom firm-named folder at the repository root level.
     """
     print("=" * 75)
-    print(f" 🎨 PROJECT ADVANTAGE — GENERATING DYNAMIC PGP LANDING PAGE")
+    print(f" 🎨 PROJECT ADVANTAGE — COMMITTING DIRECTORY TREE GENERATION")
     print("=" * 75)
     
     if not CONFIG_PATH.exists():
@@ -65,6 +65,11 @@ def generate_landing_page(target_crd):
         if raw_name.endswith(extension):
             raw_name = raw_name.rsplit(extension, 1)[0].strip()
     url_slug = re.sub(r'[^a-z0-9]+', '-', raw_name).strip('-')
+
+    # 🌟 FILE POSITION RESOLUTION: Root Folder / {url_slug} / index.html
+    firm_folder_path = project_root / url_slug
+    os.makedirs(firm_folder_path, exist_ok=True)
+    destination_path = firm_folder_path / "index.html"
 
     # Data Mappings for Chart.js
     years_5 = ["2022", "2023", "2024", "2025", "2026"]
@@ -136,7 +141,7 @@ def generate_landing_page(target_crd):
         </section>
 
         <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
-            <a href="https://calendly.com/precisiongrowthpartners/nadir-discovery-call" 
+            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
                target="_blank"
                class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
                 Book a 15-min Discovery Call
@@ -212,7 +217,7 @@ def generate_landing_page(target_crd):
         </section>
 
         <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
-            <a href="https://calendly.com/precisiongrowthpartners/nadir-discovery-call" 
+            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
                target="_blank"
                class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
                 Book a 15-min Discovery Call
@@ -274,20 +279,15 @@ def generate_landing_page(target_crd):
 </html>
 """
     
-    # Save the file locally matching the URL safe slug exactly
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    destination_path = OUTPUT_DIR / f"{url_slug}.html"
+    # Write the index file into the newly targeted nested folder location
     with open(destination_path, "w", encoding="utf-8") as fh:
         fh.write(html_template)
-    print(f" -> Compiled unique presentation layout locally at: previews/{destination_path.name}")
+    print(f" -> Compiled dynamic layout layout safely: {url_slug}/index.html")
 
     # ── AUTOMATED DEPLOYMENT PUSH TO GITHUB/NETLIFY ───────────────────────
     print("  Syncing incremental directory tree to GitHub repository...")
     try:
-        # Cache current position
         script_dir = os.getcwd()
-        
-        # Move up to project root folder context
         os.chdir(project_root)
         
         # Execute automated Git command sequence natively
@@ -295,12 +295,9 @@ def generate_landing_page(target_crd):
         subprocess.run(f'git commit --allow-empty -m "Automated ADVantage deploy: {url_slug}"', shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("git push origin main", shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         
-        # Return safely to execution directory tracker context
         os.chdir(script_dir)
-        
         site_verification = config.get('NETLIFY_SITE_ID', 'unlinked')
         
-        # 🌟 UPDATED: Success panel print strings optimized to reference advantage subdomain
         print(f"\n[✔] SUCCESS: Custom ADVantage array deployed on complete autopilot! (Site Ref: {site_verification[:8]}...)")
         print(f"    Live Secure URL: https://advantage.precisiongrowthpartners.io/{url_slug}")
         
