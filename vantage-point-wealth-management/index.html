@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADVantage Review: VANTAGE POINT WEALTH MANAGEMENT</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Custom 5-Year Growth Analytics for VANTAGE POINT WEALTH MANAGEMENT">
+    <meta property="og:url" content="https://advantage.precisiongrowthpartners.io/vantage-point-wealth-management">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .brand-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-[#2b2b2b] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-[#bf8660] selection:text-black antialiased">
+
+    <header class="max-w-4xl w-full mx-auto px-6 pt-12 pb-4 text-left flex flex-col gap-4 border-b border-[#4a4a4a]/40">
+        <a href="https://precisiongrowthpartners.io/" target="_blank" rel="noopener noreferrer" class="inline-block hover:opacity-80 transition-opacity">
+            <img src="https://framerusercontent.com/images/S8VQesQNIT2grrkBle7vzbRnVZc.png?scale-down-to=512&width=8000&height=4500" 
+                alt="Precision Growth Partners Logo" 
+                class="w-28 sm:w-44 h-auto object-contain block">
+        </a> 
+        <div>
+            <h1 class="text-3xl lg:text-5xl font-bold tracking-tight text-white mb-2 sm:mb-1">VANTAGE POINT WEALTH MANAGEMENT</h1>
+            <p class="text-sm sm:text-md text-[#bf8660] font-medium tracking-wide uppercase">We studied 5 years of your firm's data. Here's what we found.</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl w-full mx-auto px-6 py-10 flex-1 space-y-10">
+        
+        <section class="bg-[#2b2b2b] border border-[#4a4a4a]/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-[#bf8660]"></div>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xs font-semibold tracking-widest text-white uppercase">5-Year Growth Trail</h2>
+                <span class="text-[10px] text-slate-500 font-mono">Source: SEC Form ADV Part 1A Matrix</span>
+            </div>
+            <div class="h-64 relative w-full">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AUM Growth (5yr)</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">1%</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AVG AUM per Advisor</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$21.77M</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">Avg Client Size</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$190K</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">HNW % of Book</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">62%</span>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#bf8660]"></span> Capacity Diagnostics
+                </h4>
+                <ul class="space-y-4">
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Concentration Risk Resilience</span>
+                                <span class="text-slate-300 font-light block mb-1">The depth of trust Vantage Point has earned with its HNW client base is a genuine competitive asset — a testament to the quality of relationships your advisors have cultivated over years of intentional service.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">By building a systematic mid-market acquisition engine that expands your mass-affluent client base in parallel, you create a diversified revenue architecture that protects existing HNW relationships while dramatically expanding the firm's total addressable growth surface.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Advisor Capacity Activation</span>
+                                <span class="text-slate-300 font-light block mb-1">Your advisors have demonstrated the ability to manage meaningful AUM per relationship, and the partial recovery in productivity metrics signals that the underlying talent and client quality within the firm remain strong.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Introducing a structured pipeline management system and repeatable client acquisition process would shift growth from advisor-dependent effort to institutional momentum — allowing each advisor to operate at peak capacity without carrying the full weight of business development alone.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Growth Infrastructure Buildout</span>
+                                <span class="text-slate-300 font-light block mb-1">Vantage Point has sustained a stable and respectable AUM range entirely through the power of its referral network and advisor relationships — a foundation that speaks to genuine client satisfaction and word-of-mouth credibility.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Layering a purpose-built lead generation engine and digital presence strategy on top of that referral foundation creates a compounding growth dynamic — one where organic trust and inbound demand work together to push AUM well beyond its current ceiling and toward the firm's true capacity potential.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Positioning Audits
+                </h4>
+                <ul class="space-y-4">
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Ideal Client Clarity</span>
+                                <span class="text-slate-300 font-light block mb-1">Vantage Point's current messaging reflects an inclusive, welcoming philosophy — a genuine reflection of the firm's commitment to serving clients across life stages — but in a competitive digital environment, broad language inadvertently signals a generalist positioning that high-value prospects often scroll past.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Defining and communicating a sharp ideal client profile — whether pre-retirees, business owners, or corporate executives — transforms the website from a brochure into a magnet, attracting the exact clients who will self-select based on deep relevance and arrive at the first conversation already pre-qualified.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">VP360 Value Articulation</span>
+                                <span class="text-slate-300 font-light block mb-1">The VP360 program represents what appears to be a genuinely differentiated service offering — a proprietary framework that likely reflects years of refinement and client-centered thinking that competitors simply cannot replicate.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Bringing VP360 to life on the homepage with a clear, compelling explanation of what it includes, how it works, and why it delivers superior outcomes would transform your most powerful differentiator from a visual teaser into a conversion engine that turns curious visitors into engaged, high-intent prospects.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Trust Signal Architecture</span>
+                                <span class="text-slate-300 font-light block mb-1">Vantage Point has clearly earned the trust of its clients through consistent, high-quality service — the kind of credibility that is built over years and reflected in the loyalty of the relationships the firm has maintained.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Translating that earned trust into visible social proof — through outcome-based client narratives, AUM milestones, years of service, and credibility markers — gives skeptical first-time visitors the evidence they need to choose Vantage Point with confidence over any competing advisory practice they may be evaluating.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+        </section>
+
+        <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
+            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
+               target="_blank"
+               class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
+                Book a 15-min Discovery Call
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="w-full border-t border-[#4a4a4a]/30 bg-[#2b2b2b] py-8 text-center px-6 space-y-2">
+        <p class="text-xs text-slate-400 font-light tracking-wide">Secure PGP Protected ADVantage Array Engine</p>
+        <p class="text-[10px] text-slate-500 max-w-2xl mx-auto leading-normal font-light">
+            Analysis built natively using verified, publicly accessible SEC Form ADV Part 1A filings historical dataset matrices (2022–2026).
+        </p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023', '2024', '2025', '2026'],
+                datasets: [{
+                    label: 'Total AUM ($M)',
+                    data: [325, 303, 328, 277, 327],
+                    backgroundColor: '#bf8660', 
+                    borderColor: '#bf8660',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }, {
+                    label: 'HNW AUM ($M)',
+                    data: [62, 161, 182, 177, 202],
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)', 
+                    borderColor: 'rgba(255, 255, 255, 0.4)',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: { color: '#e2e8f0', font: { family: 'Poppins', size: 11, weight: '500' } } 
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { size: 11, family: 'Poppins' } } },
+                    y: { grid: { color: 'rgba(74, 74, 74, 0.25)' }, ticks: { color: '#cbd5e1' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
