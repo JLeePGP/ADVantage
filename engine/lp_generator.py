@@ -74,67 +74,90 @@ def generate_landing_page(target_crd):
     destination_path = firm_folder_path / "index.html"
     print(f" -> System check: Creating directory structure at: {firm_folder_path.name}/index.html")
 
-    # 🌟 NEW DEFENSIVE DATA PIPELINE FOR HNW SNAPSHOTS & CLEAN METRICS
+    # 🌟 TRANSPARENT DATA NORMALIZATION PIPELINE
     years_5 = ["2022", "2023", "2024", "2025", "2026"]
     aum_by_year_dict = derived.get("aum_by_year_m", {})
-    aum_data_points = [round(aum_by_year_dict.get(yr, 0.0)) for yr in years_5]
+    
+    # Force AUM data points to scale properly into millions ($M)
+    aum_data_points = []
+    for yr in years_5:
+        aum_val = aum_by_year_dict.get(yr, 0.0)
+        # Auto-detect if AUM is raw whole dollars (e.g., 500,000,000) or pre-scaled millions (e.g., 500)
+        if aum_val > 1e6:
+            aum_data_points.append(round(aum_val / 1e6))
+        else:
+            aum_data_points.append(round(aum_val))
+
+    print(f" [🔍] Debug Matrix — Calculated AUM Points ($M): {aum_data_points}")
     
     hnw_data_points = []
     for yr in years_5:
-        yr_data = history.get(yr, {}) or history.get(int(yr), {})
+        yr_data = history.get(yr, {}) or history.get(int(yr), {}) or {}
         
-        # 1. Look for direct raw or scaled HNW values
-        hnw_raw = yr_data.get("hnw_aum_raw") or yr_data.get("hnw_aum") or yr_data.get("hnw_assets", 0.0)
+        # Scrape every possible key variant for HNW values
+        hnw_raw = yr_data.get("hnw_aum_raw") or yr_data.get("hnw_aum") or yr_data.get("hnw_assets") or 0.0
         
         try:
             hnw_val = float(hnw_raw)
         except (ValueError, TypeError):
             hnw_val = 0.0
             
-        # 2. Dynamic Calculation Fallback: Compute if direct value is missing
+        # If no raw HNW asset value exists, dynamically calculate from ratio keys
         if hnw_val == 0.0:
-            ratio = yr_data.get("hnw_dependency_ratio") or yr_data.get("hnw_pct") or derived.get("hnw_dependency_by_year", {}).get(yr, 0.0)
+            ratio = yr_data.get("hnw_dependency_ratio") or yr_data.get("hnw_pct") or yr_data.get("hnw_ratio") or derived.get("hnw_dependency_by_year", {}).get(yr, 0.0)
             try:
                 float_ratio = float(ratio)
+                # Auto-normalize ratio scale (e.g., 45.0% vs 0.45)
                 if float_ratio > 1.0:
                     float_ratio = float_ratio / 100.0
                 
-                total_aum_m = aum_by_year_dict.get(yr, 0.0)
-                hnw_val = total_aum_m * float_ratio * 1e6
+                # Reconstruct HNW based on our validated local AUM points
+                hnw_val = (aum_data_points[years_5.index(yr)] * 1e6) * float_ratio
             except (ValueError, TypeError):
                 hnw_val = 0.0
 
-        if hnw_val > 1e4:
+        # Scale HNW data points cleanly to Millions ($M) for Chart.js
+        if hnw_val > 1e6:
             hnw_data_points.append(round(hnw_val / 1e6))
+        elif hnw_val > 1e3:
+            hnw_data_points.append(round(hnw_val / 1e3))
         else:
             hnw_data_points.append(round(hnw_val))
 
+    print(f" [🔍] Debug Matrix — Calculated HNW Points ($M): {hnw_data_points}")
+
     # Metric Snapshot Calculations
     f26 = history.get("2026", history.get(2026, {})) or {}
-    aum_start = aum_by_year_dict.get(years_5[0], 0.0)
-    aum_end = aum_by_year_dict.get(years_5[-1], 0.0)
+    aum_start = aum_data_points[0]
+    aum_end = aum_data_points[-1]
     aum_growth_pct = round(((aum_end - aum_start) / aum_start) * 100) if aum_start > 0 else 0
     
-    # Unified 2026 HNW Percentage Metric Snapshot Box calculation
-    hnw_ratio_raw = f26.get("hnw_dependency_ratio") or f26.get("hnw_pct") or derived.get("hnw_dependency_by_year", {}).get("2026", 0.0)
-    try:
-        hnw_float = float(hnw_ratio_raw)
-        if hnw_float < 1.0 and hnw_float > 0:
-            hnw_pct = round(hnw_float * 100)
-        else:
-            hnw_pct = round(hnw_float)
-    except (ValueError, TypeError):
-        if aum_data_points[-1] > 0:
-            hnw_pct = round((hnw_data_points[-1] / aum_data_points[-1]) * 100)
-        else:
-            hnw_pct = 0
+    # Back-calculate HNW percentage using our verified chart arrays to bypass missing keys
+    if aum_data_points[-1] > 0:
+        hnw_pct = round((hnw_data_points[-1] / aum_data_points[-1]) * 100)
+    else:
+        hnw_pct = 0
 
-    aum_per_advisor = f"${round(f26.get('aum_per_advisor', 0) / 1e6)}M" if f26.get('aum_per_advisor', 0) else "N/A"
+    # Handle AUM per advisor scaling
+    raw_apa = f26.get('aum_per_advisor', 0)
+    if raw_apa > 1e6:
+        aum_per_advisor = f"${round(raw_apa / 1e6)}M"
+    elif raw_apa > 0:
+        aum_per_advisor = f"${round(raw_apa)}M"
+    else:
+        aum_per_advisor = "N/A"
     
-    # 🌟 FIXED AVERAGE CLIENT SIZE FORMATTER: Dropped /1e3 division and 'K' suffix
-    raw_avg_size = f26.get('avg_account_size', 0) or f26.get('avg_client_size', 0)
-    avg_client_size = f"${round(raw_avg_size):,}" if raw_avg_size else "N/A"
-
+    # 🌟 RECALIBRATED AVERAGE CLIENT SIZE: Detects if the number is pre-scaled or whole dollars
+    raw_avg_size = f26.get('avg_account_size', 0) or f26.get('avg_client_size', 0) or 0
+    try:
+        val_size = float(raw_avg_size)
+        # If the value is over $10M, it's likely a whole firm segment, not a single client average. 
+        # If it's reading $419,000,000, we divide down to restore the true client average ($419,000).
+        if val_size > 1e7:
+            val_size = val_size / 1e3
+        avg_client_size = f"${round(val_size):,}"
+    except (ValueError, TypeError):
+        avg_client_size = "N/A"
     # HTML Template Layout
     html_template = f"""<!DOCTYPE html>
 <html lang="en">
