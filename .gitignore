@@ -1,0 +1,20 @@
+# Block only the raw SEC CSV databases inside the data folder
+*.csv
+*.CSV
+
+# Block the hidden local Netlify cache folder inside data
+.netlify/
+
+# Block global pipeline data and keys in the root or data folders
+advantage_config.json
+__pycache__/
+.env
+
+# Block local website build directories
+netlify_build/
+
+# Local Database Client & Analytics Cache
+.dbeaver/
+.beekeeper/
+*.db
+*.sqlite
