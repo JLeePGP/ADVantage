@@ -150,10 +150,11 @@ def generate_landing_page(target_crd):
             if val <= 0:
                 return "N/A"
             
-            # Case A: If it's an AUM-level variable already pre-scaled to Millions (like 153)
+            # Case A: If it's an AUM-level variable already pre-scaled to Millions (like 112.23)
             if force_millions:
                 if val >= 1000:
                     return f"${val/1000:.2f}B".replace(".00", "")
+                # 🌟 FIX: Round to the nearest whole integer to drop decimal clutter for large millions
                 return f"${round(val)}M"
                 
             # Case B: Standard whole dollar inputs auto-detecting breakpoint distributions
