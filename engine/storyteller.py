@@ -31,30 +31,49 @@ INPUT_JSON = "data/output/financial_profiles.json"
 
 # ── AGENTIC STORYTELLING SYNTHESIS FUNCTION ──────────────────────────────────
 def synthesize_storyline(firm_name, financial_inferences, marketing_gaps):
-    """Fuses diagnostic data loops into a single hyper-compelling outreach hook."""
+    """Fuses diagnostic data loops into a single hyper-compelling outreach hook and structured page copy."""
     
     system_instruction = (
         "You are an elite, highly persuasive sales engineer and executive speechwriter for a premium "
         "growth acceleration agency targeting Registered Investment Advisors (RIAs).\n\n"
-        "Your job is to look at a firm's operational pain points and marketing gaps, and combine them "
-        "into a single masterly crafted narrative hook designed to immediately capture a founder's attention.\n\n"
-        "CRITICAL CRITERIA:\n"
-        "1. Return your output strictly as a JSON object with a single root key called 'story_hook' containing a string.\n"
-        "2. Do not include markdown blocks, backticks (e.g., no ```json), or wrapping text. Return raw JSON text only.\n"
-        "3. Tone: Bold, deeply strategic, challenging, yet highly professional. Avoid generic marketing hype or sales clichés.\n"
-        "4. Your narrative must bridge the gap between their real metrics (e.g., advisor burnout) and their website messaging blindspots."
+        "Your job is to take raw operational pain points and marketing gaps, and transform them into "
+        "a highly intentional presentation narrative that makes the prospect feel validated, intrigued, and empowered.\n\n"
+        "CRITICAL OUTPUT FORMAT CRITERIA:\n"
+        "You must return your output STRICTLY as a raw JSON object with exactly three root keys. Do not include markdown blocks, backticks (e.g., no ```json), or wrapping text. Return raw JSON text only.\n\n"
+        "THE JSON SCHEMA:\n"
+        "{\n"
+        '  "story_hook": "A single masterfully crafted narrative string designed as an internal operator speech script.",\n'
+        '  "capacity_diagnostics": [\n'
+        "    {\n"
+        '      "headline": "A 2-3 word confident headline (e.g., Scale Horizon, Asset Velocity)",\n'
+        '      "insight": "A single sentence acknowledging or validating their operational foundation/current state.",\n'
+        '      "opportunity": "A single sentence framing how optimizing this specific element unlocks their next growth horizon."\n'
+        "    }\n"
+        "  ],\n"
+        '  "positioning_audits": [\n'
+        "    {\n"
+        '      "headline": "A 2-3 word brand positioning headline (e.g., Market Differentiation, Value Clarity)",\n'
+        '      "insight": "A single sentence identifying an exact positioning gap or message mismatch on their site.",\n'
+        '      "opportunity": "A single sentence framing how sharpening this message elevates their profile to premium clients."\n'
+        "    }\n"
+        "  ]\n"
+        "}\n\n"
+        "CRITICAL WRITING CONTRAINTS:\n"
+        "1. Generate EXACTLY 3 items for 'capacity_diagnostics' and EXACTLY 3 items for 'positioning_audits'.\n"
+        "2. Avoid blunt, defensive, or overly aggressive AI phrasing. The tone must be strategic, elite, welcoming, and collaborative.\n"
+        "3. Every single 'insight' must feel respectful of what they've built, and every 'opportunity' must feel deeply inspiring."
     )
     
     user_context = (
         f"Firm Name: {firm_name}\n\n"
-        f"Financial Trajectory Pain Points:\n{json.dumps(financial_inferences, indent=2)}\n\n"
-        f"Website Positioning Gaps:\n{json.dumps(marketing_gaps, indent=2)}"
+        f"Raw Financial Trajectory Pain Points:\n{json.dumps(financial_inferences, indent=2)}\n\n"
+        f"Raw Website Positioning Gaps:\n{json.dumps(marketing_gaps, indent=2)}"
     )
     
     try:
         response = client.messages.create(
             model="claude-sonnet-4-6",
-            max_tokens=1000,
+            max_tokens=2000, # Increased slightly to accommodate structured lists
             temperature=0.4,
             system=system_instruction,
             messages=[
@@ -98,12 +117,15 @@ def build_personalized_story(target_crd):
     story_results = synthesize_storyline(firm_name, fin_inf, mkt_gaps)
     
     if story_results and "story_hook" in story_results:
-        profiles[str(target_crd)]["story_hook"] = story_results["story_hook"]
+        # Save the polished structured copy straight into the database dictionary
+        profiles[str(target_crd)]["story_hook"] = story_results.get("story_hook")
+        profiles[str(target_crd)]["capacity_diagnostics_clean"] = story_results.get("capacity_diagnostics", [])
+        profiles[str(target_crd)]["positioning_audits_clean"] = story_results.get("positioning_audits", [])
         
         with open(json_absolute_path, "w", encoding="utf-8") as f:
             json.dump(profiles, f, indent=2)
             
-        print("\n[✔] STAGE 3 SUCCESSFUL: Unified narrative saved to master database record.")
+        print("\n[✔] STAGE 3 SUCCESSFUL: Polished copy metrics saved to master database record.")
         print("-" * 75)
         print(story_results["story_hook"])
         print("-" * 75)

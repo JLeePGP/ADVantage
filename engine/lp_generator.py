@@ -51,11 +51,22 @@ def generate_landing_page(target_crd):
     
     firm_name = identity.get("firm_name", "Your Practice").strip()
     
-    inferences = firm.get("financial_inferences", [])
-    gaps = firm.get("marketing_gaps", [])
+    # 🌟 NEW UPGRADE: Pull the AI-optimized, structured narrative objects
+    inferences_clean = firm.get("capacity_diagnostics_clean", [])
+    gaps_clean = firm.get("positioning_audits_clean", [])
     story_hook = firm.get("story_hook", "")
 
-    if not inferences or not gaps or not story_hook:
+    # BACKWARDS-COMPATIBILITY FALLBACK HANDLERS:
+    # If a firm hasn't been run through the new storyteller, convert old text strings to objects on the fly
+    if not inferences_clean:
+        raw_inf = firm.get("financial_inferences", [])
+        inferences_clean = [{"headline": "Operational Focus", "insight": bullet, "opportunity": ""} for bullet in raw_inf if bullet.strip()]
+        
+    if not gaps_clean:
+        raw_gaps = firm.get("marketing_gaps", [])
+        gaps_clean = [{"headline": "Positioning Shift", "insight": bullet, "opportunity": ""} for bullet in raw_gaps if bullet.strip()]
+
+    if not inferences_clean or not gaps_clean or not story_hook:
         print(f"[!] ERROR: Missing agent states for CRD #{target_crd}. Run main.py stages 1-3 first.")
         return
 
@@ -258,20 +269,24 @@ def generate_landing_page(target_crd):
         </section>
 
         <section class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            
             <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
                 <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-1.5 rounded-full bg-[#bf8660]"></span> Capacity Diagnostics
                 </h4>
-                <ul class="space-y-3">
-                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
-                        <span class="text-[#bf8660] font-mono">•</span> <span>{inferences[0]}</span>
+                <ul class="space-y-4">
+                    {"".join([f'''
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">{item.get("headline", "Strategic Focus")}</span>
+                                <span class="text-slate-300 font-light block mb-1">{item.get("insight", "")}</span>
+                                {f'<span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">{item.get("opportunity", "")}</span>' if item.get("opportunity") else ''}
+                            </div>
+                        </div>
                     </li>
-                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
-                        <span class="text-[#bf8660] font-mono">•</span> <span>{inferences[1]}</span>
-                    </li>
-                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
-                        <span class="text-[#bf8660] font-mono">•</span> <span>{inferences[2]}</span>
-                    </li>
+                    ''' for item in inferences_clean])}
                 </ul>
             </div>
 
@@ -279,16 +294,19 @@ def generate_landing_page(target_crd):
                 <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Positioning Audits
                 </h4>
-                <ul class="space-y-3">
-                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
-                        <span class="text-slate-400 font-mono">•</span> <span>{gaps[0]}</span>
+                <ul class="space-y-4">
+                    {"".join([f'''
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">{item.get("headline", "Positioning Shift")}</span>
+                                <span class="text-slate-300 font-light block mb-1">{item.get("insight", "")}</span>
+                                {f'<span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">{item.get("opportunity", "")}</span>' if item.get("opportunity") else ''}
+                            </div>
+                        </div>
                     </li>
-                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
-                        <span class="text-slate-400 font-mono">•</span> <span>{gaps[1]}</span>
-                    </li>
-                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
-                        <span class="text-slate-400 font-mono">•</span> <span>{gaps[2]}</span>
-                    </li>
+                    ''' for item in gaps_clean])}
                 </ul>
             </div>
         </section>

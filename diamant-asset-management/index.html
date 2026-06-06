@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADVantage Review: DIAMANT ASSET MANAGEMENT, INC.</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Custom 5-Year Growth Analytics for DIAMANT ASSET MANAGEMENT, INC.">
+    <meta property="og:url" content="https://advantage.precisiongrowthpartners.io/diamant-asset-management">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .brand-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-[#2b2b2b] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-[#bf8660] selection:text-black antialiased">
+
+    <header class="max-w-4xl w-full mx-auto px-6 pt-12 pb-4 text-left flex flex-col gap-4 border-b border-[#4a4a4a]/40">
+        <a href="https://precisiongrowthpartners.io/" target="_blank" rel="noopener noreferrer" class="inline-block hover:opacity-80 transition-opacity">
+            <img src="https://framerusercontent.com/images/S8VQesQNIT2grrkBle7vzbRnVZc.png?scale-down-to=512&width=8000&height=4500" 
+                alt="Precision Growth Partners Logo" 
+                class="w-28 sm:w-44 h-auto object-contain block">
+        </a> 
+        <div>
+            <h1 class="text-3xl lg:text-5xl font-bold tracking-tight text-white mb-2 sm:mb-1">DIAMANT ASSET MANAGEMENT, INC.</h1>
+            <p class="text-sm sm:text-md text-[#bf8660] font-medium tracking-wide uppercase">We studied 5 years of your firm's data. Here's what we found.</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl w-full mx-auto px-6 py-10 flex-1 space-y-10">
+        
+        <section class="bg-[#2b2b2b] border border-[#4a4a4a]/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-[#bf8660]"></div>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xs font-semibold tracking-widest text-white uppercase">5-Year Growth Trail</h2>
+                <span class="text-[10px] text-slate-500 font-mono">Source: SEC Form ADV Part 1A Matrix</span>
+            </div>
+            <div class="h-64 relative w-full">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AUM Growth (5yr)</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">8%</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AVG AUM per Advisor</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$70.51M</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">Avg Client Size</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$3.59M</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">HNW % of Book</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">97%</span>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#bf8660]"></span> Capacity Diagnostics
+                </h4>
+                <ul class="space-y-4">
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Advisor Resilience</span>
+                                <span class="text-slate-300 font-light block mb-1">The depth of trust and AUM concentration your advisors carry is a direct reflection of the extraordinary client relationships Diamant has cultivated over decades.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Structuring a deliberate capacity and succession architecture now transforms that concentration from a latent vulnerability into a durable competitive moat that protects firm value and client continuity for the long term.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Growth Engine</span>
+                                <span class="text-slate-300 font-light block mb-1">Diamant's referral-driven client base is a powerful testament to the quality of service and outcomes you consistently deliver to your most valued relationships.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Layering a systematic, relationship-aligned business development process alongside that referral foundation creates a compounding pipeline that ensures intentional growth independent of market cycles or natural attrition.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Client Tier Architecture</span>
+                                <span class="text-slate-300 font-light block mb-1">Your firm's unwavering focus on high-net-worth clients reflects a clear and disciplined vision for the caliber of relationships you choose to serve.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Introducing a complementary emerging-wealth or next-generation client tier creates a strategic buffer that diversifies revenue risk while deepening multigenerational relationships that anchor the firm's future AUM base.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Positioning Audits
+                </h4>
+                <ul class="space-y-4">
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Prospect Clarity</span>
+                                <span class="text-slate-300 font-light block mb-1">Diamant's selectivity and high-touch service model are genuine differentiators, yet the current site gives ideal prospects no signal about the caliber of client the firm is designed to serve.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Communicating a clear investment minimum or client profile statement immediately elevates perceived exclusivity and ensures every inbound conversation begins with a pre-qualified, high-intent prospect who already sees themselves in your world.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Credibility Architecture</span>
+                                <span class="text-slate-300 font-light block mb-1">Seventy-plus years of guidance and a deeply personalized investment approach represent a legacy of excellence that very few firms in this space can legitimately claim.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Translating that legacy into tangible proof points — curated client outcomes, third-party recognition, or benchmark-anchored narratives — converts your heritage from a compelling assertion into an irrefutable reason for sophisticated prospects to choose Diamant over every alternative.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Fiduciary Transparency</span>
+                                <span class="text-slate-300 font-light block mb-1">Diamant's commitment to its clients is evident in the longevity and loyalty of the relationships it has sustained across market cycles and generational transitions.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Proactively surfacing your fee philosophy and fiduciary standard on the site disarms the single most common hesitation among high-net-worth prospects and positions Diamant as the confident, transparent choice in a landscape where competitors are still reluctant to lead with honesty.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+        </section>
+
+        <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
+            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
+               target="_blank"
+               class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
+                Book a 15-min Discovery Call
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="w-full border-t border-[#4a4a4a]/30 bg-[#2b2b2b] py-8 text-center px-6 space-y-2">
+        <p class="text-xs text-slate-400 font-light tracking-wide">Secure PGP Protected ADVantage Array Engine</p>
+        <p class="text-[10px] text-slate-500 max-w-2xl mx-auto leading-normal font-light">
+            Analysis built natively using verified, publicly accessible SEC Form ADV Part 1A filings historical dataset matrices (2022–2026).
+        </p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023', '2024', '2025', '2026'],
+                datasets: [{
+                    label: 'Total AUM ($M)',
+                    data: [196, 181, 211, 234, 212],
+                    backgroundColor: '#bf8660', 
+                    borderColor: '#bf8660',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }, {
+                    label: 'HNW AUM ($M)',
+                    data: [186, 171, 197, 219, 205],
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)', 
+                    borderColor: 'rgba(255, 255, 255, 0.4)',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: { color: '#e2e8f0', font: { family: 'Poppins', size: 11, weight: '500' } } 
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { size: 11, family: 'Poppins' } } },
+                    y: { grid: { color: 'rgba(74, 74, 74, 0.25)' }, ticks: { color: '#cbd5e1' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
