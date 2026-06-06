@@ -69,7 +69,10 @@ def generate_landing_page(target_crd):
     # 🌟 FILE POSITION RESOLUTION: Root Folder / {url_slug} / index.html
     firm_folder_path = project_root / url_slug
     os.makedirs(firm_folder_path, exist_ok=True)
+    
+    # Place the layout file cleanly inside as index.html
     destination_path = firm_folder_path / "index.html"
+    print(f" -> System check: Creating directory structure at: {firm_folder_path.name}/index.html")
 
     # Data Mappings for Chart.js
     years_5 = ["2022", "2023", "2024", "2025", "2026"]
