@@ -161,9 +161,13 @@ def generate_landing_page(target_crd):
             if val >= 1e9:
                 return f"${val / 1e9:.2f}B".replace(".00", "")
             elif val >= 1e6:
+                # 🌟 DECIMALS OPTIMIZATION:
+                # If it's over $100M, drop decimals entirely ($112M).
+                # If it's a smaller single digit, keep precision ($1.35M).
+                if val >= 1e8:
+                    return f"${round(val / 1e6)}M"
                 return f"${val / 1e6:.2f}M".replace(".00", "")
             elif val >= 1e3:
-                # Rounds cleanly to the nearest whole thousand for dashboard notation (e.g. 765524 -> 766K)
                 return f"${round(val / 1e3)}K"
             else:
                 return f"${round(val)}"
