@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telemetry Review: HARRISON STREET PRIVATE WEALTH LLC</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Custom 5-Year Growth Analytics for HARRISON STREET PRIVATE WEALTH LLC">
+    <meta property="og:url" content="https://telemetry.precisiongrowthpartners.io/crd-143857">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .brand-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-[#2b2b2b] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-[#bf8660] selection:text-black antialiased">
+
+    <header class="max-w-4xl w-full mx-auto px-6 pt-12 pb-4 text-left flex flex-col gap-4 border-b border-[#4a4a4a]/40">
+        <a href="https://precisiongrowthpartners.io/" target="_blank" rel="noopener noreferrer" class="inline-block hover:opacity-80 transition-opacity">
+            <img src="https://framerusercontent.com/images/S8VQesQNIT2grrkBle7vzbRnVZc.png?scale-down-to=512&width=8000&height=4500" 
+                alt="Precision Growth Partners Logo" 
+                class="w-28 sm:w-44 h-auto object-contain block">
+        </a> 
+        <div>
+            <h1 class="text-3xl lg:text-5xl font-bold tracking-tight text-white mb-2 sm:mb-1">HARRISON STREET PRIVATE WEALTH LLC</h1>
+            <p class="text-sm sm:text-md text-[#bf8660] font-medium tracking-wide uppercase">We studied 5 years of your firm's data. Here's what we found.</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl w-full mx-auto px-6 py-10 flex-1 space-y-10">
+        
+        <section class="w-full">
+            <div class="bg-[#1f1f1f] rounded-2xl border border-[#4a4a4a]/60 p-8 shadow-2xl relative ring-1 ring-[#4a4a4a]/40">
+                <h4 class="text-xs font-bold text-[#bf8660] uppercase tracking-widest mb-3">Strategic Telemetry Briefing</h4>
+                <p class="text-base sm:text-lg text-slate-200 font-light leading-relaxed">
+                    "Harrison Street Private Wealth is at an inflection point that most founders only recognize in hindsight — and by then, the window to act has already closed. Here is what the data is telling you: over the past five years, your firm has shed 27% of its AUM, watched advisor productivity collapse by two-thirds despite doubling your headcount, and remained structurally tethered to a book of business so concentrated that a single institutional redemption could trigger a shock your current infrastructure has no mechanism to absorb. The 2026 rebrand from Versus Capital Advisors to Harrison Street Private Wealth was the right instinct — a signal that leadership understands the old identity no longer serves the firm's ambitions. But a new name without a new acquisition engine is not a strategy; it is a rebranding of vulnerability. Your website, the first place any prospective advisor or allocator goes to validate a relationship, opens with legal disclaimers instead of a reason to believe. There is no differentiated value proposition, no advisor-facing proof of capability, no performance narrative, no social proof — nothing that converts a curious visitor into a committed partner. What this means operationally is stark: your firm is running an eleven-person team on a relationship-referral model that has demonstrably failed to replace lost mandates, with zero marketing infrastructure to systematically generate new ones. You are not facing a headcount problem or a branding problem in isolation — you are facing a structural growth problem disguised as a series of smaller operational frustrations. The firms that survive this kind of inflection point are not the ones that hire another advisor or refresh their logo. They are the ones that build a client acquisition architecture precise enough to target, attract, and close the HNW and institutional relationships that can actually diversify concentration risk and restore AUM momentum. That is the conversation we are here to have."
+                </p>
+            </div>
+            <p class="text-center text-xs text-slate-400 mt-3 font-light tracking-wide italic">Custom dynamic narrative engineered from longitudinal SEC data vectors</p>
+        </section>
+
+        <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
+            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
+               target="_blank"
+               class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
+                Book a 15-min Discovery Call
+            </a>
+        </div>
+
+        <hr class="border-[#4a4a4a]/30 my-2">
+
+        <section class="bg-[#2b2b2b] border border-[#4a4a4a]/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-[#bf8660]"></div>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xs font-semibold tracking-widest text-white uppercase">5-Year Growth Trail</h2>
+                <span class="text-[10px] text-slate-500 font-mono">Source: SEC Form ADV Part 1A Matrix</span>
+            </div>
+            <div class="h-64 relative w-full">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AUM Growth (5yr)</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">-27%</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AVG AUM per Advisor</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$376M</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">Avg Client Size</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$591,230K</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">HNW % of Book</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">0%</span>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#bf8660]"></span> Capacity Diagnostics
+                </h4>
+                <ul class="space-y-3">
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-[#bf8660] font-mono">•</span> <span>Severe AUM erosion coupled with extreme client concentration risk: total AUM declined 27% over five years (from $5.67B to $4.14B at a -7.57% CAGR) while the entire book remains confined to only 5-7 institutional accounts with zero HNW client diversification, meaning a single redemption event can trigger a disproportionate and potentially unrecoverable AUM shock.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-[#bf8660] font-mono">•</span> <span>Catastrophic advisor productivity collapse driven by headcount expansion without corresponding AUM growth: AUM-per-advisor plummeted 67% from $1.13B in 2022 to $376M in 2026 as the advisor roster more than doubled (5 to 11), signaling that new hires are not generating net new assets and are instead diluting revenue-per-head, inflating the firm's cost structure, and compressing margins at a time when the asset base is already shrinking.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-[#bf8660] font-mono">•</span> <span>Persistent absence of marketing infrastructure combined with a mid-cycle brand relaunch (Versus Capital Advisors rebranded to Harrison Street Private Wealth in 2026) indicates the firm lacks a systematic client acquisition engine: with has_marketing_infrastructure flagged false across all observable years and no measurable growth in client count despite a 67% increase in team size, the firm is operationally dependent on relationship-driven referrals that have demonstrably failed to offset AUM attrition, leaving it structurally unable to replace lost mandates or scale into new client segments.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Positioning Audits
+                </h4>
+                <ul class="space-y-3">
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-slate-400 font-mono">•</span> <span>No clear value proposition or differentiation statement explaining why financial advisors should choose Harrison Street Private Wealth over competing private wealth platforms — the homepage leads with legal disclaimers rather than a compelling advisor-facing pitch.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-slate-400 font-mono">•</span> <span>Complete absence of advisor-specific benefits, tools, or resources (e.g., practice management support, due diligence materials, commission structures, or co-investment opportunities), leaving advisors with no actionable reason to engage or allocate client assets.</span>
+                    </li>
+                    <li class="text-xs text-slate-300 leading-relaxed flex gap-2 font-light">
+                        <span class="text-slate-400 font-mono">•</span> <span>No social proof, credibility signals, or track record messaging such as AUM figures, fund performance highlights, institutional pedigree, or advisor testimonials — making it impossible for a visiting advisor to assess trustworthiness or competitive positioning.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
+            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
+               target="_blank"
+               class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
+                Book a 15-min Discovery Call
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="w-full border-t border-[#4a4a4a]/30 bg-[#2b2b2b] py-8 text-center px-6 space-y-2">
+        <p class="text-xs text-slate-400 font-light tracking-wide">Secure PGP Protected Telemetry Array Engine</p>
+        <p class="text-[10px] text-slate-500 max-w-2xl mx-auto leading-normal font-light">
+            Analysis built natively using verified, publicly accessible SEC Form ADV Part 1A filings historical dataset matrices (2022–2026).
+        </p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023', '2024', '2025', '2026'],
+                datasets: [{
+                    label: 'Total AUM ($M)',
+                    data: [5671, 5688, 5084, 4592, 4139],
+                    backgroundColor: '#bf8660', 
+                    borderColor: '#bf8660',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }, {
+                    label: 'HNW AUM ($M)',
+                    data: [0, 0, 0, 0, 0],
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)', 
+                    borderColor: 'rgba(255, 255, 255, 0.4)',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: { color: '#e2e8f0', font: { family: 'Poppins', size: 11, weight: '500' } } 
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { size: 11, family: 'Poppins' } } },
+                    y: { grid: { color: 'rgba(74, 74, 74, 0.25)' }, ticks: { color: '#cbd5e1' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
