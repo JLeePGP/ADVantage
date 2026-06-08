@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import sys
 from pathlib import Path
@@ -117,9 +118,13 @@ def synthesize_storyline(firm_name, financial_inferences, marketing_gaps, derive
             ]
         )
         raw_text = response.content[0].text.strip()
+        match = re.search(r'\{.*\}', raw_text, re.DOTALL)
+        if match:
+            return json.loads(match.group(0))
         return json.loads(raw_text)
     except Exception as e:
         print(f"    [!] Storyteller Agent loop failure: {str(e)}")
+        print(f"    [DEBUG] Raw model response:\n{raw_text if 'raw_text' in dir() else '(no response captured)'}")
         return None
 
 # ── RUNTIME EXECUTION DISPATCHER ───────────────────────────────────────────
