@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python engine/math_processor.py)"
+      "Bash(python engine/math_processor.py)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\jklee\\\\OneDrive\\\\Desktop\\\\PGP\\\\ADVantage\" -Recurse -Force)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(Sort-Object FullName)",
+      "Bash(python3 *)"
     ]
   }
 }
