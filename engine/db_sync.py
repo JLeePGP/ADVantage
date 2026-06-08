@@ -103,121 +103,96 @@ def upsert_firm(crd, firm_name, website_url, url_slug, propensity_index,
         except (TypeError, ValueError):
             return 0.0
 
-    query = text("""
-        INSERT INTO public.firms (
-            crd_number, firm_name, website_url, url_slug, propensity_index,
-            aum_2022_m, aum_2023_m, aum_2024_m, aum_2025_m, aum_2026_m,
-            advisor_count_2026, total_clients_raw,
-            aum_growth_pct, hnw_pct, advisor_aum_str, avg_client_str,
-            address, city, state, phone, iapd_url, latest_adv_filing_date,
-            composite_score, priority_tier, rank_position, signal_flags,
-            aum_cagr_pct, aum_by_year_m, hnw_by_year_m,
-            advisor_count_by_year, avg_account_size_by_year,
-            hnw_dependency_by_year, aum_per_advisor_by_year,
-            live_url, last_deployed_at
-        )
-        VALUES (
-            :crd, :firm_name, :website_url, :url_slug, :propensity_index,
-            :aum_2022, :aum_2023, :aum_2024, :aum_2025, :aum_2026,
-            :advisor_count, :total_clients,
-            :aum_growth_pct, :hnw_pct, :advisor_aum_str, :avg_client_str,
-            :address, :city, :state, :phone, :iapd_url, :latest_adv_filing_date,
-            :composite_score, :priority_tier, :rank_position,
-            CAST(:signal_flags AS JSONB),
-            :aum_cagr_pct,
-            CAST(:aum_by_year_m AS JSONB),
-            CAST(:hnw_by_year_m AS JSONB),
-            CAST(:advisor_count_by_year AS JSONB),
-            CAST(:avg_account_size_by_year AS JSONB),
-            CAST(:hnw_dependency_by_year AS JSONB),
-            CAST(:aum_per_advisor_by_year AS JSONB),
-            :live_url, :last_deployed_at
-        )
-        ON CONFLICT (crd_number) DO UPDATE SET
-            firm_name                = EXCLUDED.firm_name,
-            website_url              = EXCLUDED.website_url,
-            url_slug                 = EXCLUDED.url_slug,
-            propensity_index         = EXCLUDED.propensity_index,
-            aum_2022_m               = EXCLUDED.aum_2022_m,
-            aum_2023_m               = EXCLUDED.aum_2023_m,
-            aum_2024_m               = EXCLUDED.aum_2024_m,
-            aum_2025_m               = EXCLUDED.aum_2025_m,
-            aum_2026_m               = EXCLUDED.aum_2026_m,
-            advisor_count_2026       = EXCLUDED.advisor_count_2026,
-            total_clients_raw        = EXCLUDED.total_clients_raw,
-            aum_growth_pct           = EXCLUDED.aum_growth_pct,
-            hnw_pct                  = EXCLUDED.hnw_pct,
-            advisor_aum_str          = EXCLUDED.advisor_aum_str,
-            avg_client_str           = EXCLUDED.avg_client_str,
-            address                  = EXCLUDED.address,
-            city                     = EXCLUDED.city,
-            state                    = EXCLUDED.state,
-            phone                    = EXCLUDED.phone,
-            iapd_url                 = EXCLUDED.iapd_url,
-            latest_adv_filing_date   = EXCLUDED.latest_adv_filing_date,
-            composite_score          = EXCLUDED.composite_score,
-            priority_tier            = EXCLUDED.priority_tier,
-            rank_position            = EXCLUDED.rank_position,
-            signal_flags             = EXCLUDED.signal_flags,
-            aum_cagr_pct             = EXCLUDED.aum_cagr_pct,
-            aum_by_year_m            = EXCLUDED.aum_by_year_m,
-            hnw_by_year_m            = EXCLUDED.hnw_by_year_m,
-            advisor_count_by_year    = EXCLUDED.advisor_count_by_year,
-            avg_account_size_by_year = EXCLUDED.avg_account_size_by_year,
-            hnw_dependency_by_year   = EXCLUDED.hnw_dependency_by_year,
-            aum_per_advisor_by_year  = EXCLUDED.aum_per_advisor_by_year,
-            live_url                 = EXCLUDED.live_url,
-            last_deployed_at         = EXCLUDED.last_deployed_at
+    params = {
+        "crd":                      str(crd),
+        "firm_name":                str(firm_name),
+        "website_url":              str(website_url or ""),
+        "url_slug":                 str(url_slug),
+        "propensity_index":         float(propensity_index) if propensity_index is not None else 0.0,
+        "aum_2022":                 _safe_aum(aum_data_points, 0),
+        "aum_2023":                 _safe_aum(aum_data_points, 1),
+        "aum_2024":                 _safe_aum(aum_data_points, 2),
+        "aum_2025":                 _safe_aum(aum_data_points, 3),
+        "aum_2026":                 _safe_aum(aum_data_points, 4),
+        "advisor_count":            int(advisor_count_2026) if advisor_count_2026 else 0,
+        "total_clients":            int(total_clients_raw) if total_clients_raw else 0,
+        "aum_growth_pct":           float(aum_growth_pct),
+        "hnw_pct":                  float(hnw_pct),
+        "advisor_aum_str":          str(advisor_aum_str),
+        "avg_client_str":           str(avg_client_str),
+        "address":                  str(address) if address else None,
+        "city":                     str(city) if city else None,
+        "state":                    str(state) if state else None,
+        "phone":                    str(phone) if phone else None,
+        "iapd_url":                 str(iapd_url) if iapd_url else None,
+        "latest_adv_filing_date":   str(latest_adv_filing_date) if latest_adv_filing_date else None,
+        "composite_score":          int(composite_score) if composite_score is not None else None,
+        "priority_tier":            str(priority_tier) if priority_tier else None,
+        "rank_position":            int(rank_position) if rank_position is not None else None,
+        "signal_flags":             json.dumps(signal_flags) if signal_flags else None,
+        "aum_cagr_pct":             float(aum_cagr_pct) if aum_cagr_pct is not None else None,
+        "aum_by_year_m":            json.dumps(aum_by_year_m) if aum_by_year_m else None,
+        "hnw_by_year_m":            json.dumps(hnw_by_year_m) if hnw_by_year_m else None,
+        "advisor_count_by_year":    json.dumps(advisor_count_by_year) if advisor_count_by_year else None,
+        "avg_account_size_by_year": json.dumps(avg_account_size_by_year) if avg_account_size_by_year else None,
+        "hnw_dependency_by_year":   json.dumps(hnw_dependency_by_year) if hnw_dependency_by_year else None,
+        "aum_per_advisor_by_year":  json.dumps(aum_per_advisor_by_year) if aum_per_advisor_by_year else None,
+        "live_url":                 str(live_url) if live_url else None,
+        "last_deployed_at":         last_deployed_at or datetime.utcnow(),
+    }
+
+    insert_query = text("""
+        INSERT INTO public.firms (crd_number, firm_name)
+        VALUES (:crd, :firm_name)
+        ON CONFLICT (crd_number) DO NOTHING;
+    """)
+
+    update_query = text("""
+        UPDATE public.firms SET
+            firm_name                = :firm_name,
+            website_url              = :website_url,
+            url_slug                 = :url_slug,
+            propensity_index         = :propensity_index,
+            aum_2022_m               = :aum_2022,
+            aum_2023_m               = :aum_2023,
+            aum_2024_m               = :aum_2024,
+            aum_2025_m               = :aum_2025,
+            aum_2026_m               = :aum_2026,
+            advisor_count_2026       = :advisor_count,
+            total_clients_raw        = :total_clients,
+            aum_growth_pct           = :aum_growth_pct,
+            hnw_pct                  = :hnw_pct,
+            advisor_aum_str          = :advisor_aum_str,
+            avg_client_str           = :avg_client_str,
+            address                  = :address,
+            city                     = :city,
+            state                    = :state,
+            phone                    = :phone,
+            iapd_url                 = :iapd_url,
+            latest_adv_filing_date   = :latest_adv_filing_date,
+            composite_score          = :composite_score,
+            priority_tier            = :priority_tier,
+            rank_position            = :rank_position,
+            signal_flags             = CAST(:signal_flags AS JSONB),
+            aum_cagr_pct             = :aum_cagr_pct,
+            aum_by_year_m            = CAST(:aum_by_year_m AS JSONB),
+            hnw_by_year_m            = CAST(:hnw_by_year_m AS JSONB),
+            advisor_count_by_year    = CAST(:advisor_count_by_year AS JSONB),
+            avg_account_size_by_year = CAST(:avg_account_size_by_year AS JSONB),
+            hnw_dependency_by_year   = CAST(:hnw_dependency_by_year AS JSONB),
+            aum_per_advisor_by_year  = CAST(:aum_per_advisor_by_year AS JSONB),
+            live_url                 = :live_url,
+            last_deployed_at         = :last_deployed_at
+        WHERE crd_number = :crd
         RETURNING id;
     """)
 
     try:
-        print(f"  [DEBUG] address={address}, city={city}, state={state}, composite_score={composite_score}, priority_tier={priority_tier}, aum_cagr_pct={aum_cagr_pct}, live_url={live_url}")
         engine = _get_engine()
         with engine.begin() as conn:
-            result = conn.execute(query, {
-                "crd":                      str(crd),
-                "firm_name":                str(firm_name),
-                "website_url":              str(website_url or ""),
-                "url_slug":                 str(url_slug),
-                "propensity_index":         float(propensity_index) if propensity_index is not None else 0.0,
-                "aum_2022":                 _safe_aum(aum_data_points, 0),
-                "aum_2023":                 _safe_aum(aum_data_points, 1),
-                "aum_2024":                 _safe_aum(aum_data_points, 2),
-                "aum_2025":                 _safe_aum(aum_data_points, 3),
-                "aum_2026":                 _safe_aum(aum_data_points, 4),
-                "advisor_count":            int(advisor_count_2026) if advisor_count_2026 else 0,
-                "total_clients":            int(total_clients_raw) if total_clients_raw else 0,
-                "aum_growth_pct":           float(aum_growth_pct),
-                "hnw_pct":                  float(hnw_pct),
-                "advisor_aum_str":          str(advisor_aum_str),
-                "avg_client_str":           str(avg_client_str),
-                "address":                  str(address) if address else None,
-                "city":                     str(city) if city else None,
-                "state":                    str(state) if state else None,
-                "phone":                    str(phone) if phone else None,
-                "iapd_url":                 str(iapd_url) if iapd_url else None,
-                "latest_adv_filing_date":   str(latest_adv_filing_date) if latest_adv_filing_date else None,
-                "composite_score":          int(composite_score) if composite_score is not None else None,
-                "priority_tier":            str(priority_tier) if priority_tier else None,
-                "rank_position":            int(rank_position) if rank_position is not None else None,
-                "signal_flags":             json.dumps(signal_flags) if signal_flags else None,
-                "aum_cagr_pct":             float(aum_cagr_pct) if aum_cagr_pct is not None else None,
-                "aum_by_year_m":            json.dumps(aum_by_year_m) if aum_by_year_m else None,
-                "hnw_by_year_m":            json.dumps(hnw_by_year_m) if hnw_by_year_m else None,
-                "advisor_count_by_year":    json.dumps(advisor_count_by_year) if advisor_count_by_year else None,
-                "avg_account_size_by_year": json.dumps(avg_account_size_by_year) if avg_account_size_by_year else None,
-                "hnw_dependency_by_year":   json.dumps(hnw_dependency_by_year) if hnw_dependency_by_year else None,
-                "aum_per_advisor_by_year":  json.dumps(aum_per_advisor_by_year) if aum_per_advisor_by_year else None,
-                "live_url":                 str(live_url) if live_url else None,
-                "last_deployed_at":         last_deployed_at or datetime.utcnow(),
-            })
+            conn.execute(insert_query, params)
+            result = conn.execute(update_query, params)
             firm_id = result.fetchone()[0]
-            verify = conn.execute(text(
-                "SELECT address, city, composite_score, live_url FROM public.firms WHERE id = :id"
-            ), {"id": firm_id})
-            row = verify.fetchone()
-            print(f"  [DEBUG VERIFY] DB has: address={row[0]}, city={row[1]}, composite_score={row[2]}, live_url={row[3]}")
             print(f"  [✔] CRM: firms record synced (id={firm_id}).")
             return firm_id
     except Exception as e:
