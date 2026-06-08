@@ -167,9 +167,9 @@ def insert_insight(firm_id, story_hook, capacity_diagnostics, positioning_audits
         )
         VALUES (
             :firm_id, :story_hook,
-            :capacity_diagnostics::jsonb,
-            :positioning_audits::jsonb,
-            :raw_response_payload::jsonb,
+            CAST(:capacity_diagnostics AS JSONB),
+            CAST(:positioning_audits AS JSONB),
+            CAST(:raw_response_payload AS JSONB),
             :youtube_embed_id,
             :insight_timestamp
         );
