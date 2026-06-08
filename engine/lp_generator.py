@@ -533,8 +533,8 @@ def generate_landing_page(target_crd):
 
 def _git_push(root_path, commit_message):
     """Execute git add / commit / push from the project root."""
+    original_dir = os.getcwd()
     try:
-        original_dir = os.getcwd()
         os.chdir(root_path)
         subprocess.run("git add .", shell=True, check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -543,22 +543,23 @@ def _git_push(root_path, commit_message):
             shell=True, check=True,
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
         )
-        subprocess.run("git push origin main", shell=True, check=True,
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        result = subprocess.run(
+            "git push origin main", shell=True,
+            capture_output=True, text=True
+        )
         os.chdir(original_dir)
-        print(f"  [✔] Git: '{commit_message}'")
+        if result.returncode != 0:
+            print(f"  [!] Git push failed:")
+            print(f"      stdout: {result.stdout.strip()}")
+            print(f"      stderr: {result.stderr.strip()}")
+        else:
+            print(f"  [✔] Git: '{commit_message}'")
     except subprocess.CalledProcessError as e:
-        print(f"  [!] Git command failed: {e}")
-        try:
-            os.chdir(original_dir)
-        except Exception:
-            pass
+        print(f"  [!] Git add/commit failed: {e}")
+        os.chdir(original_dir)
     except Exception as e:
         print(f"  [!] Git push exception: {e}")
-        try:
-            os.chdir(original_dir)
-        except Exception:
-            pass
+        os.chdir(original_dir)
 
 
 if __name__ == "__main__":
