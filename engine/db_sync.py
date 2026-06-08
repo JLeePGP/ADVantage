@@ -172,6 +172,7 @@ def upsert_firm(crd, firm_name, website_url, url_slug, propensity_index,
     """)
 
     try:
+        print(f"  [DEBUG] address={address}, city={city}, state={state}, composite_score={composite_score}, priority_tier={priority_tier}, aum_cagr_pct={aum_cagr_pct}, live_url={live_url}")
         engine = _get_engine()
         with engine.begin() as conn:
             result = conn.execute(query, {
