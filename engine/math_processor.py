@@ -38,7 +38,7 @@ OUTPUT_TOP100_JSON = os.path.join(BASE_DIR, "data", "output", "prospects_top100.
 OUTPUT_MASTER_JSON = os.path.join(BASE_DIR, "data", "output", "financial_profiles.json")
 
 # -- ICP SCALE FILTERS (applied to LATEST_YEAR snapshot only) ------------------
-MIN_AUM       = 150_000_000    # $150M floor
+MIN_AUM       = 100_000_000    # $100M floor
 MAX_AUM       = 5_000_000_000  # $5B ceiling
 MAX_EMPLOYEES = 200
 
@@ -94,7 +94,6 @@ def _load_csv(year, path):
 def _apply_qualification_filters(df):
     n0 = len(df)
     df = df[df["5E(1)"].str.strip().str.upper() == "Y"].copy()
-    df = df[df["5E(5)"].str.strip().str.upper() == "N"].copy()
     df = df[df["5F(1)"].str.strip().str.upper() == "Y"].copy()
 
     df["_disc"]      = df["5F(2)(a)"].apply(safe_float)
@@ -334,14 +333,15 @@ def run_scoring_engine(firms):
     df = pd.DataFrame(scored)
     if df.empty: raise RuntimeError("Scoring loop failed to resolve registers.")
 
-    # Apply Goldilocks filtration windows
+    # Goldilocks window — only for determining which firms rank in the top 100
     df_gk = df[(df["composite_score"] >= 20) & (df["composite_score"] <= 65)].copy()
-    df_ranked = df_gk.sort_values(by=["propensity_index", "composite_score"], ascending=[False, False])
-    
-    # Target the entire unified pool length dynamically
-    universal_pool = df_ranked.head(len(df_ranked))
+    df_gk_ranked = df_gk.sort_values(by=["propensity_index", "composite_score"], ascending=[False, False])
+    top100_crd_set = set(df_gk_ranked.head(100)["crd_number"].tolist())
 
-    return universal_pool["crd_number"].tolist(), universal_pool
+    # All scored firms sorted — this feeds the master vault
+    df_all = df.sort_values(by=["propensity_index", "composite_score"], ascending=[False, False])
+
+    return df_all["crd_number"].tolist(), df_all, top100_crd_set
 
 # -- DERIVED MULTI-YEAR METRICS -------------------------------------------------
 def _compute_derived_metrics(history):
@@ -369,7 +369,7 @@ def _compute_derived_metrics(history):
     }
 
 # -- REFACTORED OUTPUT GENERATION LAYER -----------------------------------------
-def generate_outputs(universal_crds, all_score_df, firms):
+def generate_outputs(universal_crds, all_score_df, firms, top100_crds):
     """
     Completely eliminates flat CSV files. Synchronizes and commits two clean JSON caches:
       1. prospects_top100.json   -- prioritized display layer for fast dashboard loads
@@ -420,8 +420,8 @@ def generate_outputs(universal_crds, all_score_df, firms):
         # Route to universal file databank
         universal_profiles[crd] = firm_payload
 
-        # Route to priority cache slice if in Top 100 allocation
-        if rank <= 100:
+        # Route to priority cache slice if in Goldilocks top 100
+        if crd in top100_crds:
             top100_profiles[crd] = firm_payload
 
     # Write Priority Dashboard JSON
@@ -443,10 +443,10 @@ def main():
 
     # Run processing tree
     firms = build_firms_database()
-    universal_crds, all_score_df = run_scoring_engine(firms)
-    
+    universal_crds, all_score_df, top100_crds = run_scoring_engine(firms)
+
     print("Generating pure JSON output layers...")
-    generate_outputs(universal_crds, all_score_df, firms)
+    generate_outputs(universal_crds, all_score_df, firms, top100_crds)
 
     print(f"\n{'='*70}\n [[OK]] ADVantage Math Ingestion Engine completely converged.\n{'='*70}\n")
 
