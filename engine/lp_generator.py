@@ -15,6 +15,7 @@ import json
 import sys
 import subprocess
 import re
+from datetime import datetime
 from pathlib import Path
 
 current_script_dir = Path(__file__).resolve().parent
@@ -483,6 +484,7 @@ def generate_landing_page(target_crd):
     if _DB_SYNC_AVAILABLE:
         print("\n  [DB] Syncing to ADVantage PostgreSQL database...")
         try:
+            hnw_by_year_m = {years_5[i]: hnw_data_points[i] for i in range(len(years_5))}
             firm_id = upsert_firm(
                 crd=str(target_crd),
                 firm_name=firm_name,
@@ -496,6 +498,25 @@ def generate_landing_page(target_crd):
                 hnw_pct=hnw_pct,
                 advisor_aum_str=aum_per_advisor,
                 avg_client_str=avg_client_size,
+                address=identity.get("address"),
+                city=identity.get("city"),
+                state=identity.get("state"),
+                phone=identity.get("phone"),
+                iapd_url=identity.get("iapd_url"),
+                latest_adv_filing_date=identity.get("latest_adv_filing_date"),
+                composite_score=scoring.get("composite_score"),
+                priority_tier=scoring.get("priority_tier"),
+                rank_position=scoring.get("rank"),
+                signal_flags=scoring.get("signal_flags"),
+                aum_cagr_pct=derived.get("aum_cagr_pct"),
+                aum_by_year_m=derived.get("aum_by_year_m"),
+                hnw_by_year_m=hnw_by_year_m,
+                advisor_count_by_year=derived.get("advisor_count_by_year"),
+                avg_account_size_by_year=derived.get("avg_account_size_by_year"),
+                hnw_dependency_by_year=derived.get("hnw_dependency_by_year"),
+                aum_per_advisor_by_year=derived.get("aum_per_advisor_by_year"),
+                live_url=live_url,
+                last_deployed_at=datetime.utcnow(),
             )
             if firm_id:
                 raw_response_payload = {
@@ -516,6 +537,8 @@ def generate_landing_page(target_crd):
                     positioning_audits=gaps_clean,
                     raw_response_payload=raw_response_payload,
                     youtube_embed_id=youtube_id,
+                    live_url=live_url,
+                    model_version="claude-sonnet-4-6",
                 )
         except Exception as db_err:
             print(f"  [!] CRM sync error (non-blocking): {db_err}")
