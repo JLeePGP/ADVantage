@@ -213,6 +213,11 @@ def upsert_firm(crd, firm_name, website_url, url_slug, propensity_index,
                 "last_deployed_at":         last_deployed_at or datetime.utcnow(),
             })
             firm_id = result.fetchone()[0]
+            verify = conn.execute(text(
+                "SELECT address, city, composite_score, live_url FROM public.firms WHERE id = :id"
+            ), {"id": firm_id})
+            row = verify.fetchone()
+            print(f"  [DEBUG VERIFY] DB has: address={row[0]}, city={row[1]}, composite_score={row[2]}, live_url={row[3]}")
             print(f"  [✔] CRM: firms record synced (id={firm_id}).")
             return firm_id
     except Exception as e:
