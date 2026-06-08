@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADVantage Review: IKE CAPITAL, LLC</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Custom 5-Year Growth Analytics for IKE CAPITAL, LLC">
+    <meta property="og:url" content="https://advantage.precisiongrowthpartners.io/ike-capital">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .brand-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-[#2b2b2b] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-[#bf8660] selection:text-black antialiased">
+
+    <header class="max-w-4xl w-full mx-auto px-6 pt-12 pb-4 text-left flex flex-col gap-4 border-b border-[#4a4a4a]/40">
+        <a href="https://precisiongrowthpartners.io/" target="_blank" rel="noopener noreferrer" class="inline-block hover:opacity-80 transition-opacity">
+            <img src="https://framerusercontent.com/images/S8VQesQNIT2grrkBle7vzbRnVZc.png?scale-down-to=512&width=8000&height=4500" 
+                alt="Precision Growth Partners Logo" 
+                class="w-28 sm:w-44 h-auto object-contain block">
+        </a> 
+        <div>
+            <h1 class="text-3xl lg:text-5xl font-bold tracking-tight text-white mb-2 sm:mb-1">IKE CAPITAL, LLC</h1>
+            <p class="text-sm sm:text-md text-[#bf8660] font-medium tracking-wide uppercase">We studied 5 years of your firm's data. Here's what we found.</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl w-full mx-auto px-6 py-10 flex-1 space-y-10">
+        
+        <section class="bg-[#2b2b2b] border border-[#4a4a4a]/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-[#bf8660]"></div>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xs font-semibold tracking-widest text-white uppercase">5-Year Growth Trail</h2>
+                <span class="text-[10px] text-slate-500 font-mono">Source: SEC Form ADV Part 1A Matrix</span>
+            </div>
+            <div class="h-64 relative w-full">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AUM Growth (5yr)</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">56%</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AVG AUM per Advisor</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$85.79M</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">Avg Client Size</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$1.11M</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">HNW % of Book</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">90%</span>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#bf8660]"></span> Capacity Diagnostics
+                </h4>
+                <ul class="space-y-4">
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Referral Ceiling</span>
+                                <span class="text-slate-300 font-light block mb-1">Ike Capital has demonstrated a rare and genuine ability to earn deep client trust — sustaining a loyal, high-net-worth client base through relationship-driven acquisition alone across five consecutive years.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">By layering a systematic client acquisition infrastructure alongside that existing referral equity, the firm can transform its most powerful asset — advisor credibility — into a repeatable pipeline that grows AUM independent of any single relationship.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Concentration Risk</span>
+                                <span class="text-slate-300 font-light block mb-1">The firm's ultra-high-net-worth client concentration reflects a deliberate, sophisticated service model built around complex, high-touch wealth management — a genuine competitive strength in an industry crowded with generalists.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Introducing a structured client segmentation and diversification strategy alongside the existing HNW core creates a more resilient AUM base, insulating revenue stability from single-event volatility while expanding the firm's total addressable market.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-[#bf8660] font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Advisor Productivity</span>
+                                <span class="text-slate-300 font-light block mb-1">The decision to expand the advisory team signals leadership's ambition and forward-looking commitment to scaling the firm's capacity to serve clients at a higher level.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Building the operational frameworks — onboarding systems, capacity allocation models, and client segmentation protocols — that sit beneath that headcount investment will convert advisor addition from a dilution event into a compounding productivity multiplier.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Positioning Audits
+                </h4>
+                <ul class="space-y-4">
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Identity Clarity</span>
+                                <span class="text-slate-300 font-light block mb-1">The current homepage creates an unintentional tension between a heritage-forward headline and a forward-looking investment philosophy centered on AI, robotics, and emerging technology — leaving sophisticated prospects uncertain about which version of the firm they are actually hiring.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Unifying the brand narrative around a single, coherent identity — one that honors the firm's disciplined foundation while confidently owning its innovation-forward investment thesis — creates an immediate and memorable differentiation that resonates with exactly the kind of forward-thinking HNW client Ike Capital is built to serve.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Trust Architecture</span>
+                                <span class="text-slate-300 font-light block mb-1">Leading the homepage with an acquisition announcement frames the firm's most visible first impression around internal corporate transition rather than the client-centered value and continuity that high-net-worth prospects and existing clients most need to feel in a moment of change.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Repositioning the homepage narrative around client outcomes, investment philosophy continuity, and the expanded capabilities the new structure unlocks transforms a potential trust disruption into a powerful confidence signal that accelerates both retention and new prospect conversion.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="text-xs leading-relaxed font-light">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-slate-400 font-mono mt-0.5">•</span>
+                            <div>
+                                <span class="font-semibold text-white tracking-wide block mb-0.5">Client Magnetism</span>
+                                <span class="text-slate-300 font-light block mb-1">The current site does not yet articulate a defined ideal client profile, a specific outcome promise, or a differentiated process — which means high-net-worth prospects arriving with real intent have no clear, compelling reason to choose Ike Capital over any other growth-oriented RIA making similar claims.</span>
+                                <span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-500/30 pl-2">Crafting a precise, resonant ideal client narrative — one that speaks directly to the specific financial complexity, ambitions, and values of the ultra-high-net-worth individuals the firm already serves brilliantly — transforms the website from a digital brochure into the firm's most powerful and always-on new business development tool.</span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+        </section>
+
+        <div class="text-center pt-4 max-w-2xl mx-auto space-y-4">
+            <a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" 
+               target="_blank"
+               class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg shadow-brand-copper/10">
+                Book a 15-min Discovery Call
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="w-full border-t border-[#4a4a4a]/30 bg-[#2b2b2b] py-8 text-center px-6 space-y-2">
+        <p class="text-xs text-slate-400 font-light tracking-wide">Secure PGP Protected ADVantage Array Engine</p>
+        <p class="text-[10px] text-slate-500 max-w-2xl mx-auto leading-normal font-light">
+            Analysis built natively using verified, publicly accessible SEC Form ADV Part 1A filings historical dataset matrices (2022–2026).
+        </p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023', '2024', '2025', '2026'],
+                datasets: [{
+                    label: 'Total AUM ($M)',
+                    data: [165, 149, 162, 157, 257],
+                    backgroundColor: '#bf8660', 
+                    borderColor: '#bf8660',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }, {
+                    label: 'HNW AUM ($M)',
+                    data: [155, 140, 153, 145, 232],
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)', 
+                    borderColor: 'rgba(255, 255, 255, 0.4)',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: { color: '#e2e8f0', font: { family: 'Poppins', size: 11, weight: '500' } } 
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { size: 11, family: 'Poppins' } } },
+                    y: { grid: { color: 'rgba(74, 74, 74, 0.25)' }, ticks: { color: '#cbd5e1' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
