@@ -430,7 +430,7 @@ def generate_landing_page(target_crd):
         avg_client_size=avg_client_size, hnw_pct=hnw_pct,
         aum_data_points=aum_data_points, hnw_data_points=hnw_data_points,
         inferences_clean=inferences_clean, gaps_clean=gaps_clean,
-        youtube_id=None
+        loom_id=None
     )
     with open(destination, "w", encoding="utf-8") as fh:
         fh.write(phase1_html)
