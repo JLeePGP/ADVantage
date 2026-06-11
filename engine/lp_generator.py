@@ -4,8 +4,8 @@ ADVantage Presentation Layer -- lp_generator.py (V3 Interactive Deploy Engine)
 Precision Growth Partners | Agentic ABM Infrastructure
 
 V3 Changes:
-  - Two-phase interactive deploy: push placeholder frame → pause for YouTube → push final
-  - YouTube ID extraction handles all URL formats (youtu.be, watch?v=, embed/, raw ID)
+  - Two-phase interactive deploy: push placeholder frame → pause for Loom → push final
+  - Loom ID extraction handles share and embed URL formats (loom.com/share/, loom.com/embed/)
   - PostgreSQL CRM sync via engine/db_sync.py (ADVantage database)
   - Combined V1+V2 HTML layout: video → CTA → chart → cards → diagnostics → CTA → disclosures
 """
@@ -30,18 +30,16 @@ except ImportError:
     _DB_SYNC_AVAILABLE = False
 
 
-def _extract_youtube_id(raw_input):
-    """Parse an 11-char YouTube video ID from any input format."""
+def _extract_loom_id(raw_input):
+    """Parse a Loom video ID from a share or embed URL."""
     raw = raw_input.strip()
-    if "youtu.be/" in raw:
-        vid = raw.split("youtu.be/")[-1].split("?")[0]
-    elif "youtube.com/watch" in raw:
-        vid = raw.split("v=")[-1].split("&")[0].split("?")[0]
-    elif "youtube.com/embed/" in raw:
-        vid = raw.split("youtube.com/embed/")[-1].split("?")[0].split('"')[0]
+    if "loom.com/share/" in raw:
+        vid = raw.split("loom.com/share/")[-1].split("?")[0].split("/")[0]
+    elif "loom.com/embed/" in raw:
+        vid = raw.split("loom.com/embed/")[-1].split("?")[0].split("/")[0]
     else:
         vid = raw.split("?")[0]
-    return vid.strip()[:11]
+    return vid.strip()
 
 
 def format_smart_currency(raw_value, force_millions=False):
@@ -72,23 +70,21 @@ def format_smart_currency(raw_value, force_millions=False):
 
 def _build_html(firm_name, url_slug, aum_growth_pct, aum_per_advisor, avg_client_size,
                 hnw_pct, aum_data_points, hnw_data_points, inferences_clean, gaps_clean,
-                youtube_id=None):
+                loom_id=None):
     """
     Compile the full landing page HTML string.
-    youtube_id=None renders a 'Video presentation loading...' placeholder frame.
+    loom_id=None renders a 'Video presentation loading...' placeholder frame.
     """
 
-    if youtube_id:
+    if loom_id:
         video_block = (
             f'<div class="relative w-full rounded-xl overflow-hidden shadow-2xl'
             f' border border-[#4a4a4a]/60" style="aspect-ratio: 16/9;">\n'
             f'            <iframe class="absolute inset-0 w-full h-full"\n'
-            f'                src="https://www.youtube.com/embed/{youtube_id}"\n'
+            f'                src="https://www.loom.com/embed/{loom_id}"\n'
             f'                title="ADVantage Review: {firm_name}"\n'
             f'                frameborder="0"\n'
-            f'                allow="accelerometer; autoplay; clipboard-write;'
-            f' encrypted-media; gyroscope; picture-in-picture; web-share"\n'
-            f'                allowfullscreen>\n'
+            f'                webkitallowfullscreen mozallowfullscreen allowfullscreen>\n'
             f'            </iframe>\n'
             f'        </div>'
         )
@@ -448,22 +444,22 @@ def generate_landing_page(target_crd):
     print(f"  Live URL: {live_url}")
     print(f"\n  Instructions:")
     print(f"  1. Open the link above — your firm dashboard is live.")
-    print(f"  2. Record your YouTube video using the briefing script below.")
-    print(f"  3. Upload to YouTube and copy the share URL.")
+    print(f"  2. Record your Loom video using the briefing script below.")
+    print(f"  3. Copy the Loom share URL.")
     print(f"{'─'*60}")
     print(f"\n  OPERATOR BRIEFING SCRIPT:\n")
     print(f'  "{story_hook}"\n')
     print(f"{'─'*60}")
 
-    # ── INTERACTIVE HALT: CAPTURE YOUTUBE LINK ────────────────────────────────
-    raw_yt_input = input("\n  ➔ Paste YouTube Link or 11-char ID here when finished: ").strip()
+    # ── INTERACTIVE HALT: CAPTURE LOOM LINK ──────────────────────────────────
+    raw_loom_input = input("\n  ➔ Paste Loom share URL here when finished: ").strip()
 
-    if not raw_yt_input:
+    if not raw_loom_input:
         print("  [!] No input received. Skipping video embed and proceeding with placeholder.")
-        youtube_id = ""
+        loom_id = ""
     else:
-        youtube_id = _extract_youtube_id(raw_yt_input)
-        print(f"\n  [*] Isolated clean YouTube ID: '{youtube_id}'")
+        loom_id = _extract_loom_id(raw_loom_input)
+        print(f"\n  [*] Isolated clean Loom ID: '{loom_id}'")
 
     # ── PHASE 2: REBUILD WITH VIDEO + DB SYNC + FINAL PUSH ───────────────────
     print("\n  [PHASE 2] Compiling final production asset with video embed...")
@@ -474,7 +470,7 @@ def generate_landing_page(target_crd):
         avg_client_size=avg_client_size, hnw_pct=hnw_pct,
         aum_data_points=aum_data_points, hnw_data_points=hnw_data_points,
         inferences_clean=inferences_clean, gaps_clean=gaps_clean,
-        youtube_id=youtube_id if youtube_id else None
+        loom_id=loom_id if loom_id else None
     )
     with open(destination, "w", encoding="utf-8") as fh:
         fh.write(final_html)
@@ -536,7 +532,7 @@ def generate_landing_page(target_crd):
                     capacity_diagnostics=inferences_clean,
                     positioning_audits=gaps_clean,
                     raw_response_payload=raw_response_payload,
-                    youtube_embed_id=youtube_id,
+                    youtube_embed_id=loom_id,
                     live_url=live_url,
                     model_version="claude-sonnet-4-6",
                 )
