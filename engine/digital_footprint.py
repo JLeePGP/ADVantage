@@ -89,10 +89,25 @@ def analyze_digital_footprint(target_crd):
     firm_payload = profiles[str(target_crd)]
     url = firm_payload.get("identity", {}).get("website_URL")
     
-    scraped_text = scrape_website_with_jina(url)
-    if not scraped_text or len(scraped_text.strip()) < 100:
+    while True:
+        scraped_text = scrape_website_with_jina(url)
+        if scraped_text and len(scraped_text.strip()) >= 100:
+            break
+
         print(" [!] ERROR: Empty or unreadable web data stream return layout.")
-        return
+        print(f"\n    Failed URL: {url}")
+        print("    [R] Type a replacement URL and press ENTER to retry")
+        print("    [S] Press ENTER (or type S) to skip and return to console")
+        choice = input("    ➔ ").strip()
+
+        if not choice or choice.upper() == "S":
+            print(" [i] Stage 2 skipped by user.")
+            return False
+
+        if choice.upper() == "R":
+            url = input("    Enter replacement URL: ").strip()
+        else:
+            url = choice
         
     print(" -> Data parsed. Generating positioning audit...")
     analysis_results = get_marketing_analysis(scraped_text)

@@ -32,8 +32,12 @@ def run_agentic_pipeline(crd_number):
     
     # Stage 2: Public Footprint Scraper Audit
     print("[STAGE 2/4] Activating Digital Footprint Scraper Agent...")
-    analyze_digital_footprint(crd_str)
+    stage2_result = analyze_digital_footprint(crd_str)
     print("\n" + "-"*50 + "\n")
+
+    if stage2_result is False:
+        print("[i] Pipeline halted at Stage 2. Returning to Command Console.")
+        return
     
     # Stage 3: Narrative Synthesis Copywriting Block
     print("[STAGE 3/4] Activating Orchestrator Storyteller Agent...")
