@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADVantage Review: BRADLEY WEALTH LLC</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Custom 5-Year Growth Analytics for BRADLEY WEALTH LLC">
+    <meta property="og:url" content="https://advantage.precisiongrowthpartners.io/bradley-wealth">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .brand-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-[#2b2b2b] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-[#bf8660] selection:text-black antialiased">
+
+    <header class="max-w-4xl w-full mx-auto px-6 pt-12 pb-4 text-left flex flex-col gap-4 border-b border-[#4a4a4a]/40">
+        <a href="https://precisiongrowthpartners.io/" target="_blank" rel="noopener noreferrer" class="inline-block hover:opacity-80 transition-opacity">
+            <img src="https://framerusercontent.com/images/S8VQesQNIT2grrkBle7vzbRnVZc.png?scale-down-to=512&width=8000&height=4500"
+                alt="Precision Growth Partners Logo"
+                class="w-28 sm:w-44 h-auto object-contain block">
+        </a>
+        <div>
+            <h1 class="text-3xl lg:text-5xl font-bold tracking-tight text-white mb-2 sm:mb-1">BRADLEY WEALTH LLC</h1>
+            <p class="text-sm sm:text-md text-[#bf8660] font-medium tracking-wide uppercase">We studied 5 years of your firm&#39;s data. Here&#39;s what we found.</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl w-full mx-auto px-6 py-10 flex-1 space-y-10">
+
+        <!-- Video Embed -->
+        <section>
+            <div class="relative w-full rounded-xl overflow-hidden border border-[#4a4a4a]/60 bg-[#1e1e1e] flex items-center justify-center" style="aspect-ratio: 16/9;">
+            <p class="text-slate-500 text-sm font-light tracking-wide">Video presentation loading...</p>
+        </div>
+        </section>
+
+        <!-- Book a Call — Primary CTA -->
+        <div class="text-center py-4 max-w-2xl mx-auto"><a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" target="_blank" class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg">Book a 15-min Discovery Call</a></div>
+
+        <!-- 5-Year Growth Chart -->
+        <section class="bg-[#2b2b2b] border border-[#4a4a4a]/60 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-[#bf8660]"></div>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xs font-semibold tracking-widest text-white uppercase">5-Year Growth Trail</h2>
+                <span class="text-[10px] text-slate-500 font-mono">Source: SEC Form ADV Part 1A Matrix</span>
+            </div>
+            <div class="h-64 relative w-full">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Metric Snapshot Cards -->
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AUM Growth (5yr)</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">-2%</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">AVG AUM per Advisor</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$39.34M</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">Avg Client Size</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">$196K</span>
+            </div>
+            <div class="bg-[#2b2b2b] border border-[#4a4a4a]/50 p-5 rounded-xl shadow-lg brand-transition hover:border-[#bf8660]/50">
+                <span class="text-[11px] text-white font-medium uppercase tracking-wider block">HNW % of Book</span>
+                <span class="text-3xl lg:text-4xl font-bold text-[#bf8660] my-1 block tracking-tight">76%</span>
+            </div>
+        </section>
+
+        <!-- Diagnostics Grid -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#bf8660]"></span> Capacity Diagnostics
+                </h4>
+                <ul class="space-y-4">
+                    <li class="text-xs leading-relaxed font-light"><div class="flex gap-2 items-start"><span class="text-[#bf8660] font-mono mt-0.5">•</span><div><span class="font-semibold text-white tracking-wide block mb-0.5">Productivity Collapse</span><span class="text-slate-300 font-light block mb-1">AUM per advisor dropped from $70.6M in 2025 to $39.3M in 2026 — a 44% single-year decline — coinciding with the addition of a fifth advisor and the loss of 75 clients.</span><span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Before adding further headcount, the firm needs a structured onboarding and client assignment model that ties new advisors to defined segments, so capacity additions translate to AUM growth rather than dilution.</span></div></div></li>
+<li class="text-xs leading-relaxed font-light"><div class="flex gap-2 items-start"><span class="text-[#bf8660] font-mono mt-0.5">•</span><div><span class="font-semibold text-white tracking-wide block mb-0.5">Retention System Absent</span><span class="text-slate-300 font-light block mb-1">Total clients fell from 279 in 2025 to 204 in 2026 — a 27% drop in one year — with no evidence of a formal client review cadence, segmentation protocol, or early-warning attrition trigger in place.</span><span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Implementing a tiered client contact model (frequency and depth scaled to AUM tier) directly addresses the attrition pattern and protects the 52 HNW relationships that now represent 75%+ of revenue.</span></div></div></li>
+<li class="text-xs leading-relaxed font-light"><div class="flex gap-2 items-start"><span class="text-[#bf8660] font-mono mt-0.5">•</span><div><span class="font-semibold text-white tracking-wide block mb-0.5">Mid-Market Pipeline Gone</span><span class="text-slate-300 font-light block mb-1">Average account size in 2026 is $195,550 — below the 2022 baseline of $234,041 — while HNW concentration rose, indicating the mid-market segment that once provided pipeline depth has been allowed to atrophy.</span><span class="text-slate-400 font-light italic block text-[11px] border-l border-[#bf8660]/30 pl-2">Defining a formal mid-market segment ($250K–$750K) with a distinct service model and onboarding path creates a feeder tier that reduces HNW concentration risk and rebuilds AUM volume without competing for the same ultra-HNW referrals.</span></div></div></li>
+                </ul>
+            </div>
+            <div class="bg-[#242424] border border-[#4a4a4a]/40 p-6 rounded-xl relative shadow-xl">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-white border-b border-[#4a4a4a]/30 pb-3 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Positioning Audits
+                </h4>
+                <ul class="space-y-4">
+                    <li class="text-xs leading-relaxed font-light"><div class="flex gap-2 items-start"><span class="text-slate-400 font-mono mt-0.5">•</span><div><span class="font-semibold text-white tracking-wide block mb-0.5">No Client Signal</span><span class="text-slate-300 font-light block mb-1">The homepage presents no minimum asset threshold, no ideal client description, and no segment-specific language — a $2M prospect and a $150K rollover prospect land on the same undifferentiated page.</span><span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-400/30 pl-2">A single above-the-fold statement defining the firm's client (e.g., 'We work with families and business owners managing $500K or more') immediately filters for fit and signals to HNW referrals that they're in the right place.</span></div></div></li>
+<li class="text-xs leading-relaxed font-light"><div class="flex gap-2 items-start"><span class="text-slate-400 font-mono mt-0.5">•</span><div><span class="font-semibold text-white tracking-wide block mb-0.5">Zero Social Proof</span><span class="text-slate-300 font-light block mb-1">No AUM figure, no years in business, no client count, and no outcome-based language appears anywhere on the site — the firm is asking prospects to trust it with no objective evidence to anchor that trust.</span><span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-400/30 pl-2">Adding two or three specific credibility markers (e.g., '$200M+ in assets managed,' 'serving Scottsdale families since [year]') directly counters the commodity positioning problem and gives referred prospects a reason to confirm the decision.</span></div></div></li>
+<li class="text-xs leading-relaxed font-light"><div class="flex gap-2 items-start"><span class="text-slate-400 font-mono mt-0.5">•</span><div><span class="font-semibold text-white tracking-wide block mb-0.5">Undifferentiated Headline</span><span class="text-slate-300 font-light block mb-1">'Wealth & Financial Planning Firm In Scottsdale' is a category description, not a positioning statement — it communicates geography and service type but nothing about why this firm over any of the competing Scottsdale RIAs making identical claims.</span><span class="text-slate-400 font-light italic block text-[11px] border-l border-slate-400/30 pl-2">Replacing the headline with a statement rooted in the firm's founding story, philosophy, or a specific client outcome it's built to deliver gives HNW prospects an emotional and strategic hook that generic competitors cannot copy.</span></div></div></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Book a Call — Secondary CTA -->
+        <div class="text-center py-4 max-w-2xl mx-auto"><a href="https://calendly.com/precisiongrowthpartners/adv-discovery-call" target="_blank" class="inline-block bg-[#bf8660] text-white font-bold text-md px-10 py-4 rounded-xl transition-all hover:bg-black shadow-lg">Book a 15-min Discovery Call</a></div>
+
+    </main>
+
+    <footer class="w-full border-t border-[#4a4a4a]/30 bg-[#2b2b2b] py-8 text-center px-6 space-y-2">
+        <p class="text-xs text-slate-400 font-light tracking-wide">Secure PGP Protected ADVantage Array Engine</p>
+        <p class="text-[10px] text-slate-500 max-w-2xl mx-auto leading-normal font-light">
+            Analysis built using verified, publicly accessible SEC Form ADV Part 1A filings (2022&#8211;2026).
+            All data sourced directly from IAPD regulatory databases. This presentation is intended for
+            informational and business development purposes only and does not constitute investment advice
+            or a solicitation. Past performance and AUM trajectories are not indicative of future results.
+        </p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023', '2024', '2025', '2026'],
+                datasets: [{
+                    label: 'Total AUM ($M)',
+                    data: [201, 186, 235, 283, 197],
+                    backgroundColor: '#bf8660',
+                    borderColor: '#bf8660',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }, {
+                    label: 'HNW AUM ($M)',
+                    data: [131, 123, 159, 209, 149],
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                    borderColor: 'rgba(255, 255, 255, 0.4)',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { color: '#e2e8f0', font: { family: 'Poppins', size: 11, weight: '500' } }
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { size: 11, family: 'Poppins' } } },
+                    y: { grid: { color: 'rgba(74, 74, 74, 0.25)' }, ticks: { color: '#cbd5e1' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
